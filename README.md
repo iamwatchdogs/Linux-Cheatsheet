@@ -70,62 +70,260 @@
 - **`ps`**: 
 	- Displays information about active processes.  
   	- Used for process monitoring and management.
+	```sh
+	# List all processes currently running
+	ps -e
+	
+	# Display detailed information about processes
+	ps aux
+	
+	# Display processes for a specific user
+	ps -u username
+	
+	# List processes in a tree format
+	ps -e --forest
+	```
 
 - **`top`**: 
 	- Interactive tool for real-time system monitoring.  
   	- Commonly used to observe system load and process activity.
+	```sh
+	# Start top to monitor system processes in real-time
+	top
+	
+	# Start top with batch mode operation for logging purposes
+	top -b
+	
+	# Display top output sorted by memory usage
+	top -o %MEM
+	
+	# Display top output with only specific user processes
+	top -u username
+	```
 
 - **`htop`**: 
 	- Enhanced version of `top` with a more user-friendly interface.  
   	- Preferred by many for real-time process monitoring.
+	```sh
+	# Start htop to monitor system processes with an interactive UI
+	htop
+	
+	# Start htop sorted by CPU usage
+	htop --sort-key PERCENT_CPU
+	
+	# Display only processes of a specific user
+	htop -u username
+	
+	# Filter processes by command name
+	htop -p $(pgrep -d ',' process_name)
+	```
 
 - **`systemctl`**: 
 	- Command to manage systemd services.  
   	- Used for starting, stopping, enabling, and checking the status of services.
+	```sh
+	# Check the status of a service
+	systemctl status apache2
+	
+	# Start a service
+	systemctl start apache2
+	
+	# Stop a service
+	systemctl stop apache2
+	
+	# Enable a service to start on boot
+	systemctl enable apache2
+	
+	# Reload systemd manager configuration
+	systemctl daemon-reload
+	```
 
 - **`service`**: 
 	- Legacy command to manage system services.  
   	- Often used on systems without systemd.
+	```sh
+	# Start a service
+	service apache2 start
+	
+	# Stop a service
+	service apache2 stop
+	
+	# Restart a service
+	service apache2 restart
+	
+	# Check the status of a service
+	service apache2 status
+	```
 
 - **`journalctl`**: 
 	- Command to query and display messages from the systemd journal.  
   	- Essential for troubleshooting system and service issues.
+	```sh
+	# View the entire system journal
+	journalctl
+	
+	# View journal logs for a specific service
+	journalctl -u apache2
+	
+	# View logs since the last boot
+	journalctl -b
+	
+	# Follow new journal entries in real-time
+	journalctl -f
+	```
 
 - **`strace`**: 
 	- Diagnostic tool to monitor system calls and signals.  
   	- Used for debugging and analyzing the behavior of applications.
+	```sh
+	# Trace system calls and signals of a command
+	strace ls
+	
+	# Trace a running process by PID
+	strace -p 1234
+	
+	# Save strace output to a file
+	strace -o output.txt ls
+	
+	# Trace only file-related system calls
+	strace -e trace=file ls
+	```
 
 - **`dmesg`**: 
 	- Prints the message buffer of the kernel.  
   	- Useful for diagnosing hardware and boot issues.
+	```sh
+	# Print the kernel ring buffer messages
+	dmesg
+	
+	# View dmesg output in a less pager
+	dmesg | less
+	
+	# Filter dmesg output for errors
+	dmesg | grep -i error
+	
+	# Clear the kernel ring buffer
+	dmesg -C
+	```
 
 - **`kill`**: 
 	- Sends a signal to a process, usually to terminate it.  
   	- Used to stop processes manually.
+	```sh
+	# Kill a process by PID
+	kill 1234
+	
+	# Send a specific signal to a process
+	kill -9 1234
+	
+	# Kill all processes with a specific name
+	pkill -f process_name
+	
+	# List available signals
+	kill -l
+	```
 
 - **`pkill`**: 
 	- Sends a signal to processes based on name and other attributes.  
   	- Useful for terminating multiple processes matching certain criteria.
+	```sh
+	# Kill processes by name
+	pkill apache2
+	
+	# Send a specific signal to processes by name
+	pkill -9 apache2
+	
+	# Kill processes owned by a specific user
+	pkill -u username
+	
+	# Kill processes matching a pattern
+	pkill -f pattern
+	```
 
 - **`pgrep`**: 
 	- Searches for processes based on name and other attributes.  
   	- Helps in finding process IDs matching specific patterns.
+	```sh
+	# List process IDs by name
+	pgrep apache2
+	
+	# List process IDs by name and user
+	pgrep -u username apache2
+	
+	# List process IDs with full command matching
+	pgrep -f pattern
+	
+	# List process IDs with extended regular expression
+	pgrep -e pattern
+	```
 
 - **`pidof`**: 
 	- Finds the process ID of a running program.  
   	- Commonly used to locate process IDs by program name.
+	```sh
+	# Get the PID of a running program
+	pidof apache2
+	
+	# Get the PIDs of a running program with multiple instances
+	pidof -x apache2
+	
+	# Get the PID of a running program with partial name match
+	pidof -c partial_name
+	```
 
 - **`lsof`**: 
 	- Lists open files and the processes that opened them.  
   	- Useful for troubleshooting file system and network issues.
+	```sh
+	# List all open files
+	lsof
+	
+	# List open files by a specific process
+	lsof -p 1234
+	
+	# List open files by a specific user
+	lsof -u username
+	
+	# List open files by a specific network port
+	lsof -i :80
+	```
 
 - **`netstat`**: 
 	- Displays network connections, routing tables, interface statistics.  
   	- Used for network troubleshooting and monitoring.
+	```sh
+	# Display network connections, routing tables, interface statistics
+	netstat -a
+	
+	# Display network connections with process information
+	netstat -tpn
+	
+	# Display listening ports
+	netstat -l
+	
+	# Display routing table
+	netstat -r
+	```
 
 - **`ss`**: 
 	- Utility to investigate sockets and connections.  
   	- Often used as a modern alternative to `netstat`.
+	```sh
+	# Display all sockets
+	ss -a
+	
+	# Display listening sockets
+	ss -l
+	
+	# Display TCP connections
+	ss -t
+	
+	# Display UDP connections
+	ss -u
+	
+	# Display summary statistics
+	ss -s
+	```
 
 #### Manage or schedule jobs for executing commands
 
