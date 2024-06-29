@@ -630,7 +630,7 @@
   systemctl status service-name
   ```
 
-### Recover from hardware, operating system, or filesystem failures
+#### Recover from hardware, operating system, or filesystem failures
 
 #### **`fsck`** 
 - Filesystem consistency check and repair.
