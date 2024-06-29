@@ -773,53 +773,114 @@ systemctl isolate rescue.target
 #### Manage Virtual Machines (libvirt)
 
 - **`virsh`**: 
-	- Command-line interface for managing virtual machines via libvirt.  
-  	- Used to create, control, and manage virtual machines.
-	<your-example>
+	- Command-line interface for managing virtual machines via libvirt.
+	- Used to create, control, and manage virtual machines.
+	```sh
+	# Connect to the default libvirt daemon
+	virsh -c qemu:///system
+
+	# List all defined virtual machines
+	virsh list --all
+	```
 
 - **`virt-install`**: 
-	- Tool to create new virtual machines.  
-  	- Used to automate the installation of new VMs.
-	<your-example>
+	- Tool to create new virtual machines.
+	- Used to automate the installation of new VMs.
+	```sh
+	# Create a new VM with specified memory, disk, and network configuration
+	virt-install --name=examplevm --memory=1024 --vcpus=1 --disk size=10 --cdrom=/path/to/os.iso --network network=default
+
+	# Install a VM using a kickstart file for automated installation
+	virt-install --name=examplevm --memory=2048 --vcpus=2 --disk size=20 --location=/path/to/os.iso --extra-args="ks=/path/to/kickstart.cfg"
+	```
 
 - **`virt-manager`**: 
-	- Graphical tool for managing virtual machines.  
-  	- Provides an interface for managing VMs.
-	<your-example>
+	- Graphical tool for managing virtual machines.
+	- Provides an interface for managing VMs.
+	```sh
+	# Launch virt-manager GUI
+	virt-manager
+
+	# Connect to a remote hypervisor
+	virt-manager --connect qemu+ssh://username@remotehost/system
+	```
 
 - **`virt-clone`**: 
-	- Clones existing virtual machines.  
-  	- Used to duplicate VMs with unique configurations.
-	<your-example>
+	- Clones existing virtual machines.
+	- Used to duplicate VMs with unique configurations.
+	```sh
+	# Clone a VM named "sourcevm" to a new VM named "clonevm"
+	virt-clone --original sourcevm --name clonevm --file /var/lib/libvirt/images/clonevm.img
+
+	# Clone a VM and specify a new MAC address for the network interface
+	virt-clone --original sourcevm --name clonevm --file /var/lib/libvirt/images/clonevm.img --mac 52:54:00:6b:29:56
+	```
 
 - **`virt-sysprep`**: 
-	- Prepares a virtual machine for cloning.  
-  	- Cleans and resets VM configurations.
-	<your-example>
+	- Prepares a virtual machine for cloning.
+	- Cleans and resets VM configurations.
+	```sh
+	# Run virt-sysprep on a VM disk image to reset machine-specific settings
+	virt-sysprep -a /var/lib/libvirt/images/sourcevm.img
+
+	# Exclude specific operations during sysprep
+	virt-sysprep -a /var/lib/libvirt/images/sourcevm.img --operations -ssh-hostkeys,-udev-persistent-net
+	```
 
 - **`qemu-img`**: 
-	- Creates, converts, and modifies disk images.  
-  	- Used for handling virtual machine disk images.
-	<your-example>
+	- Creates, converts, and modifies disk images.
+	- Used for handling virtual machine disk images.
+	```sh
+	# Create a new QCOW2 disk image
+	qemu-img create -f qcow2 /var/lib/libvirt/images/newdisk.img 20G
+
+	# Convert a VMDK image to QCOW2 format
+	qemu-img convert -f vmdk -O qcow2 /path/to/source.vmdk /var/lib/libvirt/images/converted.img
+	```
 
 - **`libvirtd`**: 
-	- Daemon for managing platform virtualization via libvirt.  
-  	- Required for running and managing virtual machines.
-	<your-example>
+	- Daemon for managing platform virtualization via libvirt.
+	- Required for running and managing virtual machines.
+	```sh
+	# Start the libvirtd daemon
+	systemctl start libvirtd
+
+	# Enable libvirtd to start on boot
+	systemctl enable libvirtd
+	```
 
 - **`virsh list`**: 
-	- Lists all active virtual machines.  
-  	- Used for monitoring running VMs.
-	<your-example>
+	- Lists all active virtual machines.
+	- Used for monitoring running VMs.
+	```sh
+	# List all running VMs
+	virsh list
+
+	# List all VMs, including those that are not running
+	virsh list --all
+	```
 
 - **`virsh start/stop`**: 
-	- Starts or stops a specified virtual machine.  
-  	- Used for controlling VM states.
-	<your-example>
+	- Starts or stops a specified virtual machine.
+	- Used for controlling VM states.
+	```sh
+	# Start a VM named "examplevm"
+	virsh start examplevm
+
+	# Stop a running VM named "examplevm"
+	virsh shutdown examplevm
+	```
 
 - **`virsh create/destroy`**: 
-	- Creates or destroys a virtual machine instance.  
-  	- Used for dynamic VM management.
+	- Creates or destroys a virtual machine instance.
+	- Used for dynamic VM management.
+	```sh
+	# Create and start a VM from an XML file
+	virsh create /path/to/vm.xml
+
+	# Forcefully stop and destroy a running VM named "examplevm"
+	virsh destroy examplevm
+	```
 
 #### Configure container engines, create and manage containers
 
