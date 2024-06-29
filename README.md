@@ -325,12 +325,12 @@
 	ss -s
 	```
 
-### Search for, install, validate, and maintain software packages or repositories
+#### Search for, install, validate, and maintain software packages or repositories
 
-#### **`yum`**
-- Package manager for RPM-based distributions.
-- Used for installing, updating, and removing packages.
-```
+- **`yum`**
+	- Package manager for RPM-based distributions.
+	- Used for installing, updating, and removing packages.
+```bash
 # Install a package
 yum install package_name
 
@@ -341,10 +341,10 @@ yum remove package_name
 yum update
 ```
 
-#### **`dnf`**
-- Next-generation package manager for RPM-based distributions.
-- Replaces `yum` with enhanced features and performance.
-```
+- **`dnf`**
+	- Next-generation package manager for RPM-based distributions.
+	- Replaces `yum` with enhanced features and performance.
+```bash
 # Install a package
 dnf install package_name
 
@@ -355,10 +355,10 @@ dnf remove package_name
 dnf upgrade
 ```
 
-#### **`apt`**
-- Package manager for Debian-based distributions.
-- Commonly used for managing .deb packages.
-```
+- **`apt`**
+	- Package manager for Debian-based distributions.
+	- Commonly used for managing .deb packages.
+```bash
 # Install a package
 apt install package_name
 
@@ -369,10 +369,10 @@ apt remove package_name
 apt update && apt upgrade
 ```
 
-#### **`rpm`**
-- Package manager for RPM packages.
-- Used for installing, querying, verifying, updating, and removing RPM packages.
-```
+- **`rpm`**
+	- Package manager for RPM packages.
+	- Used for installing, querying, verifying, updating, and removing RPM packages.
+```bash
 # Install an RPM package
 rpm -ivh package_name.rpm
 
@@ -383,10 +383,10 @@ rpm -qa
 rpm -e package_name
 ```
 
-#### **`dpkg`**
-- Base package management system for Debian.
-- Used for low-level package operations.
-```
+- **`dpkg`**
+	- Base package management system for Debian.
+	- Used for low-level package operations.
+```bash
 # Install a .deb package
 dpkg -i package_name.deb
 
@@ -397,10 +397,10 @@ dpkg -r package_name
 dpkg -l
 ```
 
-#### **`snap`**
-- Package manager for Snap packages.
-- Used for installing and managing containerized software packages.
-```
+- **`snap`**
+	- Package manager for Snap packages.
+	- Used for installing and managing containerized software packages.
+```bash
 # Install a snap package
 snap install package_name
 
@@ -411,10 +411,10 @@ snap remove package_name
 snap list
 ```
 
-#### **`flatpak`**
-- Package manager for Flatpak packages.
-- Used for installing and running sandboxed desktop applications.
-```
+- **`flatpak`**
+	- Package manager for Flatpak packages.
+	- Used for installing and running sandboxed desktop applications.
+```bash
 # Install a flatpak package
 flatpak install remote_name package_name
 
@@ -425,10 +425,10 @@ flatpak uninstall package_name
 flatpak list
 ```
 
-#### **`zypper`**
-- Command line interface of ZYpp package manager for openSUSE.
-- Used for installing, updating, and managing software packages.
-```
+- **`zypper`**
+	- Command line interface of ZYpp package manager for openSUSE.
+	- Used for installing, updating, and managing software packages.
+```bash
 # Install a package
 zypper install package_name
 
@@ -439,10 +439,10 @@ zypper remove package_name
 zypper update
 ```
 
-#### **`pip`**
-- Package manager for Python packages.
-- Used to install and manage Python software libraries.
-```
+- **`pip`**
+	- Package manager for Python packages.
+	- Used to install and manage Python software libraries.
+```bash
 # Install a Python package
 pip install package_name
 
@@ -453,10 +453,10 @@ pip uninstall package_name
 pip list
 ```
 
-#### **`gem`**
-- Package manager for Ruby packages.
-- Used to manage Ruby libraries (gems).
-```
+- **`gem`**
+	- Package manager for Ruby packages.
+	- Used to manage Ruby libraries (gems).
+```bash
 # Install a gem
 gem install gem_name
 
@@ -467,10 +467,10 @@ gem uninstall gem_name
 gem list
 ```
 
-#### **`apt-key`**
-- Manages keys for apt's trusted keyring.
-- Used to add and remove repository signing keys.
-```
+- **`apt-key`**
+	- Manages keys for apt's trusted keyring.
+	- Used to add and remove repository signing keys.
+```bash
 # Add a key from a URL
 wget -qO - key_url | apt-key add -
 
@@ -481,10 +481,10 @@ apt-key list
 apt-key del key_id
 ```
 
-#### **`yum-config-manager`**
-- Manages yum repository configuration.
-- Used to add, enable, and disable repositories.
-```
+- **`yum-config-manager`**
+	- Manages yum repository configuration.
+	- Used to add, enable, and disable repositories.
+```bash
 # Add a new repository
 yum-config-manager --add-repo repository_url
 
@@ -495,10 +495,10 @@ yum-config-manager --enable repository_name
 yum-config-manager --disable repository_name
 ```
 
-#### **`add-apt-repository`**
-- Adds a repository to the sources list.
-- Used to include additional software sources.
-```
+- **`add-apt-repository`**
+	- Adds a repository to the sources list.
+	- Used to include additional software sources.
+```bash
 # Add a new repository
 add-apt-repository ppa:repository_name
 
@@ -509,10 +509,10 @@ add-apt-repository --remove ppa:repository_name
 apt update
 ```
 
-#### **`update-rc.d`**
-- Updates System-V style init script links.
-- Used to manage service runlevels in Debian-based systems.
-```
+- **`update-rc.d`**
+	- Updates System-V style init script links.
+	- Used to manage service runlevels in Debian-based systems.
+```bash
 # Add a service to startup
 update-rc.d service_name defaults
 
@@ -523,10 +523,10 @@ update-rc.d -f service_name remove
 update-rc.d service_name
 ```
 
-#### **`systemctl enable/disable`**
-- Enables or disables a service to start at boot.
-- Used to manage service startup in systemd systems.
-```
+- **`systemctl enable/disable`**
+	- Enables or disables a service to start at boot.
+	- Used to manage service startup in systemd systems.
+```bash
 # Enable a service to start at boot
 systemctl enable service_name
 
