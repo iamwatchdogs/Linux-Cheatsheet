@@ -3,7 +3,6 @@
 ### Operations Deployment (25%)
 
 #### Configure kernel parameters, persistent and non-persistent
-	<your-example>
 
 - **`sysctl`**: 
 	- Command to modify kernel parameters at runtime.  
@@ -68,7 +67,6 @@
 	```
 
 #### Diagnose, identify, manage, and troubleshoot processes and services
-	<your-example>
 
 - **`ps`**: 
 	- Displays information about active processes.  
@@ -632,9 +630,9 @@
 
 #### Recover from hardware, operating system, or filesystem failures
 
-#### **`fsck`** 
-- Filesystem consistency check and repair.
-- Used to check and repair filesystem errors.
+- **`fsck`** 
+	- Filesystem consistency check and repair.
+	- Used to check and repair filesystem errors.
 ```sh
 # Check and repair the filesystem on /dev/sda1
 fsck /dev/sda1
@@ -646,9 +644,9 @@ fsck -n /dev/sda1
 fsck -y /dev/sda1
 ```
 
-#### **`e2fsck`**
-- Filesystem consistency check for ext2/ext3/ext4 filesystems.
-- Commonly used for checking and fixing ext filesystems.
+- **`e2fsck`**
+	- Filesystem consistency check for ext2/ext3/ext4 filesystems.
+	- Commonly used for checking and fixing ext filesystems.
 ```sh
 # Check and repair ext4 filesystem on /dev/sda2
 e2fsck /dev/sda2
@@ -660,9 +658,9 @@ e2fsck -n /dev/sda2
 e2fsck -p /dev/sda2
 ```
 
-#### **`dd`**
-- Utility to convert and copy files at a low level.
-- Used for creating disk images and backups.
+- **`dd`**
+	- Utility to convert and copy files at a low level.
+	- Used for creating disk images and backups.
 ```sh
 # Create a disk image of /dev/sda and save it as sda.img
 dd if=/dev/sda of=/path/to/sda.img
@@ -674,9 +672,9 @@ dd if=/path/to/image.iso of=/dev/sdb bs=4M
 dd if=/dev/sda of=/dev/sdb
 ```
 
-#### **`smartctl`**
-- Controls and monitors storage devices using S.M.A.R.T.
-- Used for checking hard drive health.
+- **`smartctl`**
+	- Controls and monitors storage devices using S.M.A.R.T.
+	- Used for checking hard drive health.
 ```sh
 # Display basic S.M.A.R.T. information for /dev/sda
 smartctl -i /dev/sda
@@ -688,9 +686,9 @@ smartctl -t short /dev/sda
 smartctl -a /dev/sda
 ```
 
-#### **`mdadm`**
-- Manages MD (multiple device) software RAID arrays.
-- Used for creating, assembling, and monitoring RAID arrays.
+- **`mdadm`**
+	- Manages MD (multiple device) software RAID arrays.
+	- Used for creating, assembling, and monitoring RAID arrays.
 ```sh
 # Create a RAID 1 array with two devices
 mdadm --create --verbose /dev/md0 --level=1 --raid-devices=2 /dev/sda /dev/sdb
@@ -702,9 +700,9 @@ mdadm --assemble /dev/md0 /dev/sda /dev/sdb
 mdadm --detail /dev/md0
 ```
 
-#### **`dracut`**
-- Tool for generating initramfs images.
-- Used for creating initial ramdisk environments.
+- **`dracut`**
+	- Tool for generating initramfs images.
+	- Used for creating initial ramdisk environments.
 ```sh
 # Generate an initramfs image for the current kernel
 dracut --force
@@ -716,9 +714,9 @@ dracut --kver 5.8.0-1-amd64 --force
 dracut --add-drivers "driver1 driver2" --force
 ```
 
-#### **`initrd`**
-- Initial ramdisk used by the Linux kernel during boot.
-- Essential for loading necessary drivers before mounting the root filesystem.
+- **`initrd`**
+	- Initial ramdisk used by the Linux kernel during boot.
+	- Essential for loading necessary drivers before mounting the root filesystem.
 ```sh
 # Create an initrd image with mkinitrd (specific to some distributions)
 mkinitrd /boot/initrd.img-5.8.0-1-amd64 5.8.0-1-amd64
@@ -730,9 +728,9 @@ lsinitrd /boot/initrd.img-5.8.0-1-amd64
 update-initramfs -u
 ```
 
-#### **`grub`**
-- GRand Unified Bootloader, manages boot configurations.
-- Used for bootloader management and configuration.
+- **`grub`**
+	- GRand Unified Bootloader, manages boot configurations.
+	- Used for bootloader management and configuration.
 ```sh
 # Update GRUB configuration after making changes
 update-grub
@@ -744,9 +742,9 @@ grub-install /dev/sda
 nano /etc/default/grub
 ```
 
-#### **`rescue mode`**
-- Special boot mode for system recovery.
-- Used to troubleshoot and repair system boot issues.
+- **`rescue mode`**
+	- Special boot mode for system recovery.
+	- Used to troubleshoot and repair system boot issues.
 ```sh
 # Boot into rescue mode from the GRUB menu
 Select the "Advanced options" entry, then the "Rescue mode" entry
@@ -758,9 +756,9 @@ systemctl rescue
 Boot the live CD/USB and select "Rescue a broken system"
 ```
 
-#### **`systemctl rescue`**
-- Boots the system into rescue mode using systemd.
-- Used for minimal system repair tasks.
+- **`systemctl rescue`**
+	- Boots the system into rescue mode using systemd.
+	- Used for minimal system repair tasks.
 ```sh
 # Enter rescue mode immediately
 systemctl rescue
