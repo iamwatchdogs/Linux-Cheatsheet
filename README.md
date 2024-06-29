@@ -328,28 +328,105 @@
 #### Manage or schedule jobs for executing commands
 
 - **`cron`**: 
-	- Daemon to execute scheduled commands.  
-  	- Commonly used for recurring task automation.
+	- Daemon to execute scheduled commands.
+	- Commonly used for recurring task automation.
+	```sh
+	Schedule a daily backup at 2 AM
+	0 2 * * * /path/to/backup/script.sh
+
+	Schedule a script to run every 5 minutes
+	*/5 * * * * /path/to/script.sh
+	```
 
 - **`crontab`**: 
-	- Command to manage cron job schedules.  
-  	- Used to set up, edit, and list scheduled tasks.
+	- Command to manage cron job schedules.
+	- Used to set up, edit, and list scheduled tasks.
+	```sh
+	List current user's cron jobs
+	crontab -l
+
+	Edit the current user's cron jobs
+	crontab -e
+	```
 
 - **`at`**: 
-	- Schedules commands to run once at a specified time.  
-  	- Useful for one-time task automation.
+	- Schedules commands to run once at a specified time.
+	- Useful for one-time task automation.
+	```sh
+	Schedule a script to run at 3 PM today
+	echo "/path/to/script.sh" | at 15:00
+
+	Schedule a command to run at midnight
+	echo "echo 'Happy New Year!'" | at midnight
+	```
 
 - **`batch`**: 
-	- Queues commands to run when system load levels permit.  
-  	- Used for batch processing during low system load.
+	- Queues commands to run when system load levels permit.
+	- Used for batch processing during low system load.
+	```sh
+	Queue a script to run when load is low
+	echo "/path/to/script.sh" | batch
+
+	Queue a command to run when the system is not busy
+	echo "tar -czf /backup/data.tar.gz /data" | batch
+	```
 
 - **`systemd timers`**: 
-	- Timer units for scheduling tasks in systemd.  
-  	- Preferred in systemd-based systems for task automation.
+	- Timer units for scheduling tasks in systemd.
+	- Preferred in systemd-based systems for task automation.
+	```sh
+	Create a timer to run a service daily
+	# Create a .service file
+	[Unit]
+	Description=Daily Backup Service
+
+	[Service]
+	Type=oneshot
+	ExecStart=/path/to/backup/script.sh
+
+	# Create a .timer file
+	[Unit]
+	Description=Run backup script daily
+
+	[Timer]
+	OnCalendar=daily
+	Persistent=true
+
+	[Install]
+	WantedBy=timers.target
+
+	Create a timer to run a service every 15 minutes
+	# Create a .service file
+	[Unit]
+	Description=Run Script Every 15 Minutes
+
+	[Service]
+	Type=oneshot
+	ExecStart=/path/to/script.sh
+
+	# Create a .timer file
+	[Unit]
+	Description=Run script every 15 minutes
+
+	[Timer]
+	OnBootSec=15min
+	OnUnitActiveSec=15min
+	Persistent=true
+
+	[Install]
+	WantedBy=timers.target
+	```
 
 - **`anacron`**: 
-	- Executes commands periodically with a frequency specified in days.  
-  	- Used to ensure periodic tasks run even if the system was off.
+	- Executes commands periodically with a frequency specified in days.
+	- Used to ensure periodic tasks run even if the system was off.
+	```sh
+	Run a daily backup script
+	1       5       cron.daily              /path/to/backup/script.sh
+
+	Run a weekly cleanup script
+	7       10      cron.weekly             /path/to/cleanup/script.sh
+	```
 
 #### Search for, install, validate, and maintain software packages or repositories
 
