@@ -3,6 +3,7 @@
 ### Operations Deployment (25%)
 
 #### Configure kernel parameters, persistent and non-persistent
+	<your-example>
 
 - **`sysctl`**: 
 	- Command to modify kernel parameters at runtime.  
@@ -47,6 +48,7 @@
 	
 	# Increase the size of the receive buffer (non-persistently)
 	sysctl -w net.core.rmem_max=16777216
+	<your-example>
 	```
 - **`/etc/sysctl.d/`**: 
 	- Directory for additional kernel parameter configuration files.  
@@ -66,6 +68,7 @@
 	```
 
 #### Diagnose, identify, manage, and troubleshoot processes and services
+	<your-example>
 
 - **`ps`**: 
 	- Displays information about active processes.  
@@ -327,253 +330,351 @@
 
 #### Search for, install, validate, and maintain software packages or repositories
 
-- **`yum`**
-	- Package manager for RPM-based distributions.
-	- Used for installing, updating, and removing packages.
-```bash
-# Install a package
-yum install package_name
+- **`yum`**:
+  - Package manager for RPM-based distributions.
+  - Used for installing, updating, and removing packages.
+  ```sh
+  # Install a package
+  sudo yum install package-name
 
-# Remove a package
-yum remove package_name
+  # Update all packages
+  sudo yum update
 
-# Update all packages
-yum update
-```
+  # Remove a package
+  sudo yum remove package-name
 
-- **`dnf`**
-	- Next-generation package manager for RPM-based distributions.
-	- Replaces `yum` with enhanced features and performance.
-```bash
-# Install a package
-dnf install package_name
+  # List installed packages
+  yum list installed
 
-# Remove a package
-dnf remove package_name
+  # Clean yum cache
+  sudo yum clean all
+  ```
 
-# Upgrade the system
-dnf upgrade
-```
+- **`dnf`**:
+  - Next-generation package manager for RPM-based distributions.
+  - Replaces `yum` with enhanced features and performance.
+  ```sh
+  # Install a package
+  sudo dnf install package-name
 
-- **`apt`**
-	- Package manager for Debian-based distributions.
-	- Commonly used for managing .deb packages.
-```bash
-# Install a package
-apt install package_name
+  # Update all packages
+  sudo dnf update
 
-# Remove a package
-apt remove package_name
+  # Remove a package
+  sudo dnf remove package-name
 
-# Update package lists and upgrade all packages
-apt update && apt upgrade
-```
+  # List installed packages
+  dnf list installed
 
-- **`rpm`**
-	- Package manager for RPM packages.
-	- Used for installing, querying, verifying, updating, and removing RPM packages.
-```bash
-# Install an RPM package
-rpm -ivh package_name.rpm
+  # Clean dnf cache
+  sudo dnf clean all
+  ```
 
-# Query installed packages
-rpm -qa
+- **`apt`**:
+  - Package manager for Debian-based distributions.
+  - Commonly used for managing .deb packages.
+  ```sh
+  # Update package list
+  sudo apt update
 
-# Remove an RPM package
-rpm -e package_name
-```
+  # Upgrade installed packages
+  sudo apt upgrade
 
-- **`dpkg`**
-	- Base package management system for Debian.
-	- Used for low-level package operations.
-```bash
-# Install a .deb package
-dpkg -i package_name.deb
+  # Install a package
+  sudo apt install package-name
 
-# Remove a package
-dpkg -r package_name
+  # Remove a package
+  sudo apt remove package-name
 
-# List installed packages
-dpkg -l
-```
+  # Clean apt cache
+  sudo apt clean
+  ```
 
-- **`snap`**
-	- Package manager for Snap packages.
-	- Used for installing and managing containerized software packages.
-```bash
-# Install a snap package
-snap install package_name
+- **`rpm`**:
+  - Package manager for RPM packages.
+  - Used for installing, querying, verifying, updating, and removing RPM packages.
+  ```sh
+  # Install a package
+  sudo rpm -i package-name.rpm
 
-# Remove a snap package
-snap remove package_name
+  # Update a package
+  sudo rpm -U package-name.rpm
 
-# List installed snap packages
-snap list
-```
+  # Remove a package
+  sudo rpm -e package-name
 
-- **`flatpak`**
-	- Package manager for Flatpak packages.
-	- Used for installing and running sandboxed desktop applications.
-```bash
-# Install a flatpak package
-flatpak install remote_name package_name
+  # Query installed packages
+  rpm -qa
 
-# Remove a flatpak package
-flatpak uninstall package_name
+  # Verify a package
+  rpm -V package-name
+  ```
 
-# List installed flatpak packages
-flatpak list
-```
+- **`dpkg`**:
+  - Base package management system for Debian.
+  - Used for low-level package operations.
+  ```sh
+  # Install a package
+  sudo dpkg -i package-name.deb
 
-- **`zypper`**
-	- Command line interface of ZYpp package manager for openSUSE.
-	- Used for installing, updating, and managing software packages.
-```bash
-# Install a package
-zypper install package_name
+  # Remove a package
+  sudo dpkg -r package-name
 
-# Remove a package
-zypper remove package_name
+  # List installed packages
+  dpkg -l
 
-# Update all packages
-zypper update
-```
+  # Reconfigure an installed package
+  sudo dpkg-reconfigure package-name
 
-- **`pip`**
-	- Package manager for Python packages.
-	- Used to install and manage Python software libraries.
-```bash
-# Install a Python package
-pip install package_name
+  # Verify package installation
+  dpkg -V package-name
+  ```
 
-# Remove a Python package
-pip uninstall package_name
+- **`snap`**:
+  - Package manager for Snap packages.
+  - Used for installing and managing containerized software packages.
+  ```sh
+  # Install a snap package
+  sudo snap install package-name
 
-# List installed Python packages
-pip list
-```
+  # Remove a snap package
+  sudo snap remove package-name
 
-- **`gem`**
-	- Package manager for Ruby packages.
-	- Used to manage Ruby libraries (gems).
-```bash
-# Install a gem
-gem install gem_name
+  # List installed snap packages
+  snap list
 
-# Uninstall a gem
-gem uninstall gem_name
+  # Refresh (update) snap packages
+  sudo snap refresh
 
-# List installed gems
-gem list
-```
+  # Find available snap packages
+  snap find
+  ```
 
-- **`apt-key`**
-	- Manages keys for apt's trusted keyring.
-	- Used to add and remove repository signing keys.
-```bash
-# Add a key from a URL
-wget -qO - key_url | apt-key add -
+- **`flatpak`**:
+  - Package manager for Flatpak packages.
+  - Used for installing and running sandboxed desktop applications.
+  ```sh
+  # Install a flatpak package
+  sudo flatpak install repo-name package-name
 
-# List trusted keys
-apt-key list
+  # Remove a flatpak package
+  sudo flatpak uninstall package-name
 
-# Remove a key
-apt-key del key_id
-```
+  # List installed flatpak packages
+  flatpak list
 
-- **`yum-config-manager`**
-	- Manages yum repository configuration.
-	- Used to add, enable, and disable repositories.
-```bash
-# Add a new repository
-yum-config-manager --add-repo repository_url
+  # Update flatpak packages
+  sudo flatpak update
 
-# Enable a repository
-yum-config-manager --enable repository_name
+  # Add a remote repository
+  sudo flatpak remote-add --if-not-exists repo-name repo-url
+  ```
 
-# Disable a repository
-yum-config-manager --disable repository_name
-```
+- **`zypper`**:
+  - Command line interface of ZYpp package manager for openSUSE.
+  - Used for installing, updating, and managing software packages.
+  ```sh
+  # Install a package
+  sudo zypper install package-name
 
-- **`add-apt-repository`**
-	- Adds a repository to the sources list.
-	- Used to include additional software sources.
-```bash
-# Add a new repository
-add-apt-repository ppa:repository_name
+  # Update all packages
+  sudo zypper update
 
-# Remove a repository
-add-apt-repository --remove ppa:repository_name
+  # Remove a package
+  sudo zypper remove package-name
 
-# Update package lists
-apt update
-```
+  # List installed packages
+  zypper search --installed-only
 
-- **`update-rc.d`**
-	- Updates System-V style init script links.
-	- Used to manage service runlevels in Debian-based systems.
-```bash
-# Add a service to startup
-update-rc.d service_name defaults
+  # Clean zypper cache
+  sudo zypper clean
+  ```
 
-# Remove a service from startup
-update-rc.d -f service_name remove
+- **`pip`**:
+  - Package manager for Python packages.
+  - Used to install and manage Python software libraries.
+  ```sh
+  # Install a package
+  pip install package-name
 
-# List service runlevels
-update-rc.d service_name
-```
+  # Upgrade a package
+  pip install --upgrade package-name
 
-- **`systemctl enable/disable`**
-	- Enables or disables a service to start at boot.
-	- Used to manage service startup in systemd systems.
-```bash
-# Enable a service to start at boot
-systemctl enable service_name
+  # Remove a package
+  pip uninstall package-name
 
-# Disable a service to prevent it from starting at boot
-systemctl disable service_name
+  # List installed packages
+  pip list
 
-# Check if a service is enabled
-systemctl is-enabled service_name
-```
+  # Show package information
+  pip show package-name
+  ```
 
+- **`gem`**:
+  - Package manager for Ruby packages.
+  - Used to manage Ruby libraries (gems).
+  ```sh
+  # Install a gem
+  gem install gem-name
+
+  # Update a gem
+  gem update gem-name
+
+  # Remove a gem
+  gem uninstall gem-name
+
+  # List installed gems
+  gem list
+
+  # Show gem information
+  gem info gem-name
+  ```
+
+- **`apt-key`**:
+  - Manages keys for apt's trusted keyring.
+  - Used to add and remove repository signing keys.
+  ```sh
+  # Add a new key
+  sudo apt-key add key-file
+
+  # List keys
+  apt-key list
+
+  # Remove a key
+  sudo apt-key del key-id
+
+  # Add a key from a URL
+  wget -q -O - key-url | sudo apt-key add -
+
+  # Export a key
+  sudo apt-key export key-id > key-file
+  ```
+
+- **`yum-config-manager`**:
+  - Manages yum repository configuration.
+  - Used to add, enable, and disable repositories.
+  ```sh
+  # Add a new repository
+  sudo yum-config-manager --add-repo repo-url
+
+  # Enable a repository
+  sudo yum-config-manager --enable repo-id
+
+  # Disable a repository
+  sudo yum-config-manager --disable repo-id
+
+  # List all repositories
+  yum-config-manager --list
+
+  # Set repository options
+  sudo yum-config-manager --setopt=option=value
+  ```
+
+- **`add-apt-repository`**:
+  - Adds a repository to the sources list.
+  - Used to include additional software sources.
+  ```sh
+  # Add a PPA repository
+  sudo add-apt-repository ppa:repo-name
+
+  # Remove a PPA repository
+  sudo add-apt-repository --remove ppa:repo-name
+
+  # Add a repository with a custom URI
+  sudo add-apt-repository "deb [arch=amd64] http://repo-url/ $(lsb_release -cs) main"
+
+  # Enable a disabled repository
+  sudo add-apt-repository -y ppa:repo-name
+
+  # Update package list after adding a repository
+  sudo apt update
+  ```
+
+- **`update-rc.d`**:
+  - Updates System-V style init script links.
+  - Used to manage service runlevels in Debian-based systems.
+  ```sh
+  # Enable a service at boot
+  sudo update-rc.d service-name defaults
+
+  # Disable a service at boot
+  sudo update-rc.d service-name disable
+
+  # Remove a service
+  sudo update-rc.d -f service-name remove
+
+  # View service status
+  update-rc.d -n service-name defaults
+
+  # Reorder service start levels
+  sudo update-rc.d service-name start 20 2 3 4 5 . stop 80 0 1 6 .
+  ```
+
+- **`systemctl enable/disable`**:
+  - Enables or disables a service to start at boot.
+  - Used to manage service startup in systemd systems.
+  ```sh
+  # Enable a service at boot
+  sudo systemctl enable service-name
+
+  # Disable a service at boot
+  sudo systemctl disable service-name
+
+  # Start a service
+  sudo systemctl start service-name
+
+  # Stop a service
+  sudo systemctl stop service-name
+
+  # Check service status
+  systemctl status service-name
+  ```
 #### Recover from hardware, operating system, or filesystem failures
 
 - **`fsck`**: 
 	- Filesystem consistency check and repair.  
   	- Used to check and repair filesystem errors.
+	<your-example>
 
 - **`e2fsck`**: 
 	- Filesystem consistency check for ext2/ext3/ext4 filesystems.  
   	- Commonly used for checking and fixing ext filesystems.
+	<your-example>
 
 - **`dd`**: 
 	- Utility to convert and copy files at a low level.  
   	- Used for creating disk images and backups.
+	<your-example>
 
 - **`smartctl`**: 
 	- Controls and monitors storage devices using S.M.A.R.T.  
   	- Used for checking hard drive health.
+	<your-example>
 
 - **`mdadm`**: 
 	- Manages MD (multiple device) software RAID arrays.  
   	- Used for creating, assembling, and monitoring RAID arrays.
+	<your-example>
 
 - **`dracut`**: 
 	- Tool for generating initramfs images.  
   	- Used for creating initial ramdisk environments.
+	<your-example>
 
 - **`initrd`**: 
 	- Initial ramdisk used by the Linux kernel during boot.  
   	- Essential for loading necessary drivers before mounting the root filesystem.
+	<your-example>
 
 - **`grub`**: 
 	- GRand Unified Bootloader, manages boot configurations.  
   	- Used for bootloader management and configuration.
+	<your-example>
 
 - **`rescue mode`**: 
 	- Special boot mode for system recovery.  
   	- Used to troubleshoot and repair system boot issues.
+	<your-example>
 
 - **`systemctl rescue`**: 
 	- Boots the system into rescue mode using systemd.  
@@ -584,38 +685,47 @@ systemctl is-enabled service_name
 - **`virsh`**: 
 	- Command-line interface for managing virtual machines via libvirt.  
   	- Used to create, control, and manage virtual machines.
+	<your-example>
 
 - **`virt-install`**: 
 	- Tool to create new virtual machines.  
   	- Used to automate the installation of new VMs.
+	<your-example>
 
 - **`virt-manager`**: 
 	- Graphical tool for managing virtual machines.  
   	- Provides an interface for managing VMs.
+	<your-example>
 
 - **`virt-clone`**: 
 	- Clones existing virtual machines.  
   	- Used to duplicate VMs with unique configurations.
+	<your-example>
 
 - **`virt-sysprep`**: 
 	- Prepares a virtual machine for cloning.  
   	- Cleans and resets VM configurations.
+	<your-example>
 
 - **`qemu-img`**: 
 	- Creates, converts, and modifies disk images.  
   	- Used for handling virtual machine disk images.
+	<your-example>
 
 - **`libvirtd`**: 
 	- Daemon for managing platform virtualization via libvirt.  
   	- Required for running and managing virtual machines.
+	<your-example>
 
 - **`virsh list`**: 
 	- Lists all active virtual machines.  
   	- Used for monitoring running VMs.
+	<your-example>
 
 - **`virsh start/stop`**: 
 	- Starts or stops a specified virtual machine.  
   	- Used for controlling VM states.
+	<your-example>
 
 - **`virsh create/destroy`**: 
 	- Creates or destroys a virtual machine instance.  
@@ -626,60 +736,74 @@ systemctl is-enabled service_name
 - **`docker`**: 
 	- Containerization platform for developing, shipping, and running applications.  
   	- Used for creating, managing, and running containers.
+	<your-example>
 
 - **`podman`**: 
 	- Daemonless container engine for managing OCI containers.  
   	- Used as a Docker alternative for container management.
+	<your-example>
 
 - **`buildah`**: 
 	- Tool for building OCI images.  
   	- Used for creating and managing container images.
+	<your-example>
 
 - **`crictl`**: 
 	- CLI for CRI-compatible container runtimes.  
   	- Used for interacting with container runtimes in Kubernetes environments.
+	<your-example>
 
 - **`kubectl`**: 
 	- CLI for Kubernetes cluster management.  
   	- Used for deploying, managing, and inspecting applications in Kubernetes.
+	<your-example>
 
 - **`docker-compose`**: 
 	- Tool for defining and running multi-container Docker applications.  
   	- Used for orchestrating multi-container deployments.
+	<your-example>
 
 - **`docker build`**: 
 	- Builds a Docker image from a Dockerfile.  
   	- Used for creating container images.
+	<your-example>
 
 - **`docker run`**: 
 	- Runs a command in a new Docker container.  
   	- Used for starting containers from images.
+	<your-example>
 
 - **`docker ps`**: 
 	- Lists running Docker containers.  
   	- Used for monitoring active containers.
+	<your-example>
 
 - **
 
 `docker images`**: 
 	- Lists Docker images on the host.  
   	- Used for managing local container images.
+	<your-example>
 
 - **`docker network`**: 
 	- Manages Docker networks.  
   	- Used for creating and managing container networks.
+	<your-example>
 
 - **`docker volume`**: 
 	- Manages Docker volumes.  
   	- Used for handling persistent storage for containers.
+	<your-example>
 
 - **`docker inspect`**: 
 	- Displays detailed information about Docker objects.  
   	- Used for troubleshooting and examining containers.
+	<your-example>
 
 - **`podman run`**: 
 	- Runs a command in a new podman container.  
   	- Used similarly to `docker run` but without a daemon.
+	<your-example>
 
 - **`podman ps`**: 
 	- Lists running podman containers.  
@@ -690,50 +814,62 @@ systemctl is-enabled service_name
 - **`sestatus`**: 
 	- Displays the current status of SELinux.  
   	- Used to check if SELinux is enabled and its current mode.
+	<your-example>
 
 - **`getsebool`**: 
 	- Retrieves the current setting of an SELinux boolean.  
   	- Used to query boolean values for SELinux policies.
+	<your-example>
 
 - **`setsebool`**: 
 	- Sets the current setting of an SELinux boolean.  
   	- Used to modify boolean values for policy tuning.
+	<your-example>
 
 - **`semanage`**: 
 	- Manages SELinux policy components.  
   	- Used for configuring SELinux policy settings.
+	<your-example>
 
 - **`restorecon`**: 
 	- Restores the default SELinux context for files.  
   	- Used to fix SELinux context issues on files.
+	<your-example>
 
 - **`chcon`**: 
 	- Changes the SELinux security context of a file.  
   	- Used for setting custom SELinux contexts.
+	<your-example>
 
 - **`ls -Z`**: 
 	- Lists files with their SELinux security context.  
   	- Used for viewing SELinux contexts of files.
+	<your-example>
 
 - **`ps -Z`**: 
 	- Displays process security contexts.  
   	- Used to check SELinux contexts of running processes.
+	<your-example>
 
 - **`audit2allow`**: 
 	- Generates SELinux policy allow rules from logs.  
   	- Used to create custom SELinux rules based on audit logs.
+	<your-example>
 
 - **`ausearch`**: 
 	- Searches the audit logs based on specified criteria.  
   	- Used for querying SELinux audit logs.
+	<your-example>
 
 - **`/etc/selinux/config`**: 
 	- Configuration file for SELinux settings.  
   	- Used for setting SELinux modes and policies.
+	<your-example>
 
 - **`semodule`**: 
 	- Manages SELinux policy modules.  
   	- Used to install and manage SELinux policy modules.
+	<your-example>
 
 - **`setenforce`**: 
 	- Switches SELinux between enforcing and permissive modes.  
@@ -746,42 +882,52 @@ systemctl is-enabled service_name
 - **`ip`**: 
 	- Command for managing network interfaces and routes.  
   	- Used for configuring IP addresses, routes, and tunnels.
+	<your-example>
 
 - **`ifconfig`**: 
 	- Legacy tool for configuring network interfaces.  
   	- Often replaced by `ip` but still used in some scripts and systems.
+	<your-example>
 
 - **`nmcli`**: 
 	- Command-line interface for NetworkManager.  
   	- Used for managing network connections and devices.
+	<your-example>
 
 - **`nmtui`**: 
 	- Text user interface for NetworkManager.  
   	- Provides a simpler interface for managing network settings.
+	<your-example>
 
 - **`hostnamectl`**: 
 	- Controls the system hostname.  
   	- Used for setting the system's hostname and related settings.
+	<your-example>
 
 - **`systemctl restart network`**: 
 	- Restarts the network service.  
   	- Used to apply network configuration changes.
+	<your-example>
 
 - **`/etc/hosts`**: 
 	- Static table lookup for hostnames.  
   	- Used for local hostname resolution.
+	<your-example>
 
 - **`/etc/resolv.conf`**: 
 	- Configuration file for DNS resolution.  
   	- Used for setting DNS servers and search domains.
+	<your-example>
 
 - **`ping`**: 
 	- Sends ICMP ECHO_REQUEST to network hosts.  
   	- Used for checking network connectivity.
+	<your-example>
 
 - **`traceroute`**: 
 	- Traces the route packets take to a network host.  
   	- Used for diagnosing network path issues.
+	<your-example>
 
 - **`netplan`**: 
 	- Network configuration tool for Ubuntu.  
@@ -792,208 +938,256 @@ systemctl is-enabled service_name
 - **`timedatectl`**: 
 	- Command to query and change the system clock and its settings.  
   	- Used for managing system time and synchronization.
+	<your-example>
 
 - **`ntpdate`**: 
 	- Synchronizes the system clock with NTP servers.  
   	- Used for one-time clock synchronization.
+	<your-example>
 
 - **`chronyc`**: 
 	- Command-line interface for the chrony NTP client.  
   	- Used for managing and monitoring chrony.
+	<your-example>
 
 - **`chronyd`**: 
 	- Daemon for the chrony NTP client.  
   	- Used for maintaining accurate system time.
+	<your-example>
 
 - **`systemctl restart chronyd`**: 
 	- Restarts the chrony daemon.  
   	- Used to apply chrony configuration changes.
 
 #### Monitor and troubleshoot networking
+	<your-example>
 
 - **`netstat`**: 
 	- Displays network connections, routing tables, and interface statistics.  
   	- Used for network troubleshooting and monitoring.
+	<your-example>
 
 - **`ss`**: 
 	- Investigates sockets and network connections.  
   	- Modern alternative to `netstat`.
+	<your-example>
 
 - **`tcpdump`**: 
 	- Network packet analyzer.  
   	- Used for capturing and analyzing network traffic.
+	<your-example>
 
 - **`wireshark`**: 
 	- Network protocol analyzer with a graphical interface.  
   	- Used for in-depth network traffic analysis.
+	<your-example>
 
 - **`iftop`**: 
 	- Displays bandwidth usage on an interface.  
   	- Used for monitoring network traffic in real-time.
+	<your-example>
 
 - **`nmap`**: 
 	- Network scanner to discover hosts and services.  
   	- Used for network discovery and security auditing.
+	<your-example>
 
 - **`ping`**: 
 	- Checks network connectivity by sending ICMP ECHO_REQUEST packets.  
   	- Commonly used to test if a host is reachable.
+	<your-example>
 
 - **`traceroute`**: 
 	- Traces the path packets take to reach a host.  
   	- Used for diagnosing network path issues.
+	<your-example>
 
 - **`mtr`**: 
 	- Combines the functionality of `ping` and `traceroute`.  
   	- Used for network diagnostic purposes.
+	<your-example>
 
 - **`dig`**: 
 	- DNS lookup utility.  
   	- Used for querying DNS name servers.
+	<your-example>
 
 - **`nslookup`**: 
 	- Queries DNS to obtain domain name or IP address mapping.  
   	- Used for DNS troubleshooting.
+	<your-example>
 
 - **`ethtool`**: 
 	- Displays and modifies network interface parameters.  
   	- Used for managing Ethernet devices.
+	<your-example>
 
 - **`ip route`**: 
 	- Shows/manages the IP routing table.  
   	- Used for configuring network routes.
+	<your-example>
 
 - **`ip link`**: 
 	- Manages and displays network interfaces.  
   	- Used for configuring network interfaces.
 
 #### Configure the OpenSSH server and client
+	<your-example>
 
 - **`sshd`**: 
 	- Secure Shell daemon.  
   	- Provides secure encrypted communications between hosts.
+	<your-example>
 
 - **`sshd_config`**: 
 	- Configuration file for the OpenSSH server.  
   	- Used to set SSH server options.
+	<your-example>
 
 - **`ssh`**: 
 	- Secure Shell client.  
   	- Used to connect to SSH servers.
+	<your-example>
 
 - **`ssh-keygen`**: 
 	- Generates, manages, and converts authentication keys for SSH.  
   	- Used for creating SSH key pairs.
+	<your-example>
 
 - **`scp`**: 
 	- Secure copy program.  
   	- Used for copying files over SSH.
+	<your-example>
 
 - **`sftp`**: 
 	- Secure file transfer program.  
   	- Used for transferring files over SSH.
+	<your-example>
 
 - **`systemctl restart sshd`**: 
 	- Restarts the SSH daemon.  
   	- Used to apply SSH server configuration changes.
 
 #### Configure packet filtering, port redirection, and NAT
+	<your-example>
 
 - **`iptables`**: 
 	- Utility for configuring Linux kernel firewall implemented in netfilter.  
   	- Used for setting up, maintaining, and inspecting firewall rules.
+	<your-example>
 
 - **`firewalld`**: 
 	- Dynamic firewall management tool with D-Bus interface.  
   	- Used for managing firewall rules in a more user-friendly way.
+	<your-example>
 
 - **`nftables`**: 
 	- Replaces iptables as the Linux firewall utility.  
   	- Used for managing firewall rules with better performance and flexibility.
+	<your-example>
 
 - **`ufw`**: 
 	- Uncomplicated Firewall, front-end for iptables.  
   	- Used for managing firewall rules easily.
+	<your-example>
 
 - **`ip6tables`**: 
 	- IPv6 version of iptables.  
   	- Used for managing IPv6 firewall rules.
+	<your-example>
 
 - **`iptables-save`**: 
 	- Saves the current iptables rules.  
   	- Used for exporting firewall rules to a file.
+	<your-example>
 
 - **`iptables-restore`**: 
 	- Restores iptables rules from a file.  
   	- Used for importing firewall rules from a file.
+	<your-example>
 
 - **`firewall-cmd`**: 
 	- Command-line interface for firewalld.  
   	- Used for managing firewalld configurations.
 
 #### Configure static routing
+	<your-example>
 
 - **`ip route`**: 
 	- Command to show/manages the IP routing table.  
   	- Used for configuring static routes.
+	<your-example>
 
 - **`route`**: 
 	- Legacy command to show and manipulate the IP routing table.  
   	- Often replaced by `ip route`.
+	<your-example>
 
 - **`nmcli`**: 
 	- Command-line interface for NetworkManager.  
   	- Used for configuring static routes via NetworkManager.
+	<your-example>
 
 - **`network-scripts`**: 
 	- Scripts for network configuration in older Linux distributions.  
   	- Used for configuring network interfaces and routes.
+	<your-example>
 
 - **`/etc/sysconfig/network-scripts/route-<interface>`**: 
 	- Configuration file for static routes in Red Hat-based systems.  
   	- Used for setting persistent static routes.
 
 #### Configure bridge and bonding devices
+	<your-example>
 
 - **`brctl`**: 
 	- Utility for configuring Ethernet bridge devices.  
   	- Used for creating and managing network bridges.
+	<your-example>
 
 - **`ip link`**: 
 	- Command to manage and display network interfaces.  
   	- Used for configuring network bonding and bridging.
+	<your-example>
 
 - **`nmcli`**: 
 	- Command-line interface for NetworkManager.  
   	- Used for configuring bonding and bridging via NetworkManager.
+	<your-example>
 
 - **`teamd`**: 
 	- Daemon to manage team network devices.  
   	- Used for creating and managing
 
  network teams (bonding).
+	<your-example>
 
 - **`bonding`**: 
 	- Linux kernel module for bonding multiple network interfaces.  
   	- Used for network interface bonding to increase throughput and redundancy.
 
 #### Implement reverse proxies and load balancers
+	<your-example>
 
 - **`nginx`**: 
 	- Web server and reverse proxy server.  
   	- Used for load balancing and reverse proxying HTTP and other protocols.
+	<your-example>
 
 - **`haproxy`**: 
 	- High Availability Proxy, provides load balancing and high availability.  
   	- Used for distributing network traffic across multiple servers.
+	<your-example>
 
 - **`apache mod_proxy`**: 
 	- Apache module for proxy/gateway functionality.  
   	- Used for reverse proxying with the Apache web server.
+	<your-example>
 
 - **`varnish`**: 
 	- HTTP accelerator and reverse proxy.  
   	- Used for caching and load balancing HTTP traffic.
+	<your-example>
 
 - **`squid`**: 
 	- Caching and forwarding HTTP proxy.  
@@ -1006,254 +1200,314 @@ systemctl is-enabled service_name
 - **`lvcreate`**: 
 	- Creates a logical volume.  
   	- Used for creating new LVM logical volumes.
+	<your-example>
 
 - **`vgcreate`**: 
 	- Creates a volume group.  
   	- Used for creating new LVM volume groups.
+	<your-example>
 
 - **`pvcreate`**: 
 	- Prepares a physical volume for use by LVM.  
   	- Used for initializing physical storage devices.
+	<your-example>
 
 - **`lvextend`**: 
 	- Extends the size of a logical volume.  
   	- Used for increasing storage capacity of an LVM logical volume.
+	<your-example>
 
 - **`vgreduce`**: 
 	- Removes physical volumes from a volume group.  
   	- Used for reducing the size of a volume group.
+	<your-example>
 
 - **`pvmove`**: 
 	- Moves physical extents from one physical volume to another.  
   	- Used for balancing storage or replacing disks.
+	<your-example>
 
 - **`vgextend`**: 
 	- Adds physical volumes to a volume group.  
   	- Used for expanding the storage pool of a volume group.
+	<your-example>
 
 - **`lvremove`**: 
 	- Removes a logical volume.  
   	- Used for deleting LVM logical volumes.
+	<your-example>
 
 - **`lvresize`**: 
 	- Resizes a logical volume.  
   	- Used for adjusting the size of an LVM logical volume.
+	<your-example>
 
 - **`vgremove`**: 
 	- Removes a volume group.  
   	- Used for deleting LVM volume groups.
+	<your-example>
 
 - **`pvremove`**: 
 	- Removes a physical volume.  
   	- Used for decommissioning physical storage devices from LVM.
+	<your-example>
 
 - **`lvdisplay`**: 
 	- Displays information about logical volumes.  
   	- Used for viewing LVM logical volume details.
+	<your-example>
 
 - **`vgdisplay`**: 
 	- Displays information about volume groups.  
   	- Used for viewing LVM volume group details.
+	<your-example>
 
 - **`pvdisplay`**: 
 	- Displays information about physical volumes.  
   	- Used for viewing LVM physical volume details.
 
 #### Manage and configure the virtual file system
+	<your-example>
 
 - **`mount`**: 
 	- Attaches a filesystem to the directory tree.  
   	- Used for mounting filesystems.
+	<your-example>
 
 - **`umount`**: 
 	- Detaches a filesystem from the directory tree.  
   	- Used for unmounting filesystems.
+	<your-example>
 
 - **`fstab`**: 
 	- Configuration file for static filesystem mounts.  
   	- Used for setting persistent mount points.
+	<your-example>
 
 - **`/etc/fstab`**: 
 	- Contains information about filesystems and their mount points.  
   	- Used for automating the mounting of filesystems at boot.
+	<your-example>
 
 - **`/etc/mtab`**: 
 	- Lists currently mounted filesystems.  
   	- Used for tracking active mounts.
+	<your-example>
 
 - **`findmnt`**: 
 	- Displays target mount point information.  
   	- Used for finding and displaying filesystem mount points.
+	<your-example>
 
 - **`blkid`**: 
 	- Displays or modifies block device attributes.  
   	- Used for querying block device information.
+	<your-example>
 
 - **`df`**: 
 	- Reports filesystem disk space usage.  
   	- Used for monitoring disk space usage.
+	<your-example>
 
 - **`du`**: 
 	- Estimates file and directory space usage.  
   	- Used for checking disk usage of files and directories.
+	<your-example>
 
 - **`lsblk`**: 
 	- Lists information about block devices.  
   	- Used for viewing block device details.
+	<your-example>
 
 - **`resize2fs`**: 
 	- Resizes ext2/3/4 filesystems.  
   	- Used for expanding or shrinking ext filesystems.
+	<your-example>
 
 - **`xfs_growfs`**: 
 	- Expands an XFS filesystem.  
   	- Used for increasing the size of an XFS filesystem.
 
 #### Create, manage, and troubleshoot filesystems
+	<your-example>
 
 - **`mkfs`**: 
 	- Builds a Linux filesystem on a device.  
   	- Used for creating new filesystems.
+	<your-example>
 
 - **`mkfs.ext4`**: 
 	- Creates an ext4 filesystem.  
   	- Commonly used for creating ext4 filesystems.
+	<your-example>
 
 - **`mkfs.xfs`**: 
 	- Creates an XFS filesystem.  
   	- Used for creating XFS filesystems.
+	<your-example>
 
 - **`tune2fs`**: 
 	- Adjusts tunable filesystem parameters on ext filesystems.  
   	- Used for modifying ext filesystem settings.
+	<your-example>
 
 - **`fsck`**: 
 	- Checks and repairs a Linux filesystem.  
   	- Used for filesystem integrity checks and repairs.
+	<your-example>
 
 - **`e2fsck`**: 
 	- Checks and repairs ext2/3/4 filesystems.  
   	- Used for ext filesystem maintenance.
+	<your-example>
 
 - **`xfs_repair`**: 
 	- Repairs an XFS filesystem.  
   	- Used for fixing issues in XFS filesystems.
+	<your-example>
 
 - **`mount -o loop`**: 
 	- Mounts a file as a filesystem.  
   	- Used for mounting disk image files.
 
 #### Use remote filesystems and network block devices
+	<your-example>
 
 - **`nfs`**: 
 	- Network File System, allows remote file sharing.  
   	- Used for accessing files over a network.
+	<your-example>
 
 - **`nfs-client`**: 
 	- Mounts NFS shares on a client system.  
   	- Used for connecting to NFS shares.
+	<your-example>
 
 - **`nfs-server`**: 
 	- Exports directories over NFS.  
   	- Used for sharing directories over a network.
+	<your-example>
 
 - **`mount.nfs`**: 
 	- Mounts NFS filesystems.  
   	- Used for attaching NFS shares.
+	<your-example>
 
 - **`/etc/exports`**: 
 	- Configuration file for NFS exports.  
   	- Used for defining shared directories in NFS.
+	<your-example>
 
 - **`autofs`**: 
 	- Automounts filesystems on demand.  
   	- Used for automatically mounting remote filesystems.
+	<your-example>
 
 - **`iscsiadm`**: 
 	- Manages iSCSI initiator connections.  
   	- Used for connecting to iSCSI targets.
+	<your-example>
 
 - **`targetcli`**: 
 	- Configures iSCSI targets.  
   	- Used for managing iSCSI target configurations.
+	<your-example>
 
 - **`mount.cifs`**: 
 	- Mounts CIFS filesystems (Samba shares).  
   	- Used for accessing Windows shares.
+	<your-example>
 
 - **`/etc/fstab`**: 
 	- Used for automating the mounting of remote filesystems.  
   	- Contains entries for remote filesystem mounts.
 
 #### Configure and manage swap space
+	<your-example>
 
 - **`swapon`**: 
 	- Enables devices and files for paging and swapping.  
   	- Used for activating swap space.
+	<your-example>
 
 - **`swapoff`**: 
 	- Disables devices and files for paging and swapping.  
   	- Used for deactivating swap space.
+	<your-example>
 
 - **`mkswap`**: 
 	- Sets up a Linux swap area.  
   	- Used for initializing swap space on a device.
+	<your-example>
 
 - **`/etc/fstab`**: 
 	- Contains entries for swap space.  
   	- Used for defining swap space to be activated at boot.
+	<your-example>
 
 - **`free`**: 
 	- Displays the amount of free and used memory in the system.  
   	- Used for monitoring memory and swap usage.
+	<your-example>
 
 - **`vmstat`**: 
 	- Reports virtual memory statistics.  
   	- Used for monitoring system performance and swap activity.
 
 #### Configure filesystem automounters
+	<your-example>
 
 - **`autofs`**: 
 	- Service that automatically mounts filesystems.  
   	- Used for on-demand mounting of filesystems.
+	<your-example>
 
 - **`/etc/auto.master`**: 
 	- Master map for autofs.  
   	- Used for configuring automount points.
+	<your-example>
 
 - **`/etc/auto.misc`**: 
 	- Example automounter map file.  
   	- Used for defining specific automount configurations.
+	<your-example>
 
 - **`automount`**: 
 	- Command to reload the automounter.  
   	- Used for applying changes to autofs configurations.
 
 #### Monitor storage performance
+	<your-example>
 
 - **`iostat`**: 
 	- Reports CPU and I/O statistics for devices and partitions.  
   	- Used for monitoring storage performance.
+	<your-example>
 
 - **`iotop`**: 
 	- Displays I/O usage by processes.  
   	- Used for identifying processes with high I/O activity.
+	<your-example>
 
 - **`df`**: 
 	- Reports filesystem disk space usage.  
   	- Used for checking available storage space.
+	<your-example>
 
 - **`du`**: 
 	- Estimates file and directory space usage.  
   	- Used for identifying disk usage by files and directories.
+	<your-example>
 
 - **`lsblk`**: 
 	- Lists information about block devices.  
   	- Used for viewing storage device details.
+	<your-example>
 
 - **`smartctl`**: 
 	- Controls and monitors storage devices using S.M.A.R.T.  
   	- Used for checking the health of storage devices.
+	<your-example>
 
 - **`blkid`**: 
 	- Displays or modifies block device attributes.  
@@ -1266,400 +1520,494 @@ systemctl is-enabled service_name
 - **`git clone`**: 
 	- Clones a repository into a new directory.  
   	- Used for copying remote repositories locally.
+	<your-example>
 
 - **`git commit`**: 
 	- Records changes to the repository.  
   	- Used for saving snapshots of the project history.
+	<your-example>
 
 - **`git pull`**: 
 	- Fetches from and integrates with another repository.  
   	- Used for updating local repositories with remote changes.
+	<your-example>
 
 - **`git push`**: 
 	- Updates remote refs along with associated objects.  
   	- Used for sharing local changes with remote repositories.
+	<your-example>
 
 - **`git branch`**: 
 	- Lists, creates, or deletes branches.  
   	- Used for managing project branches.
+	<your-example>
 
 - **`git checkout`**: 
 	- Switches branches or restores working tree files.  
   	- Used for changing branches or reverting changes.
+	<your-example>
 
 - **
 
 `git merge`**: 
 	- Joins two or more development histories together.  
   	- Used for combining changes from different branches.
+	<your-example>
 
 - **`git status`**: 
 	- Shows the working tree status.  
   	- Used for viewing the current state of the repository.
+	<your-example>
 
 - **`git log`**: 
 	- Shows the commit logs.  
   	- Used for reviewing project history.
+	<your-example>
 
 - **`git diff`**: 
 	- Shows changes between commits, commit and working tree, etc.  
   	- Used for comparing changes.
 
 #### File management, archiving, and compression
+	<your-example>
 
 - **`ls`**: 
 	- Lists directory contents.  
   	- Used for viewing files and directories.
+	<your-example>
 
 - **`cp`**: 
 	- Copies files and directories.  
   	- Used for duplicating files and directories.
+	<your-example>
 
 - **`mv`**: 
 	- Moves or renames files and directories.  
   	- Used for relocating or renaming files and directories.
+	<your-example>
 
 - **`rm`**: 
 	- Removes files or directories.  
   	- Used for deleting files and directories.
+	<your-example>
 
 - **`tar`**: 
 	- Archives files.  
   	- Used for creating and extracting tar archives.
+	<your-example>
 
 - **`gzip`**: 
 	- Compresses or decompresses files.  
   	- Used for handling gzip compressed files.
+	<your-example>
 
 - **`bzip2`**: 
 	- Compresses or decompresses files.  
   	- Used for handling bzip2 compressed files.
+	<your-example>
 
 - **`zip`**: 
 	- Packages and compresses files.  
   	- Used for creating zip archives.
+	<your-example>
 
 - **`unzip`**: 
 	- Extracts files from a zip archive.  
   	- Used for unpacking zip files.
 
 #### Text processing
+	<your-example>
 
 - **`grep`**: 
 	- Searches for patterns in files.  
   	- Used for finding specific text within files.
+	<your-example>
 
 - **`awk`**: 
 	- Pattern scanning and processing language.  
   	- Used for text processing and data extraction.
+	<your-example>
 
 - **`sed`**: 
 	- Stream editor for filtering and transforming text.  
   	- Used for text manipulation and editing.
+	<your-example>
 
 - **`cut`**: 
 	- Removes sections from each line of files.  
   	- Used for extracting parts of text files.
+	<your-example>
 
 - **`sort`**: 
 	- Sorts lines of text files.  
   	- Used for ordering text data.
+	<your-example>
 
 - **`uniq`**: 
 	- Reports or omits repeated lines.  
   	- Used for finding unique lines in text files.
+	<your-example>
 
 - **`wc`**: 
 	- Prints newline, word, and byte counts for files.  
   	- Used for counting lines, words, and characters in text.
 
 #### Process management
+	<your-example>
 
 - **`ps`**: 
 	- Reports a snapshot of current processes.  
   	- Used for viewing running processes.
+	<your-example>
 
 - **`top`**: 
 	- Displays Linux tasks.  
   	- Used for monitoring system performance and processes.
+	<your-example>
 
 - **`htop`**: 
 	- Interactive process viewer.  
   	- Enhanced alternative to `top`.
+	<your-example>
 
 - **`kill`**: 
 	- Sends a signal to a process.  
   	- Used for terminating processes.
+	<your-example>
 
 - **`pkill`**: 
 	- Sends signals to processes by name.  
   	- Used for terminating processes by name.
+	<your-example>
 
 - **`nice`**: 
 	- Runs a command with modified scheduling priority.  
   	- Used for adjusting process priorities.
+	<your-example>
 
 - **`renice`**: 
 	- Alters priority of running processes.  
   	- Used for changing process priorities on the fly.
+	<your-example>
 
 - **`nohup`**: 
 	- Runs a command immune to hangups.  
   	- Used for running commands in the background.
 
 #### System information
+	<your-example>
 
 - **`uname`**: 
 	- Prints system information.  
   	- Used for displaying system and kernel information.
+	<your-example>
 
 - **`df`**: 
 	- Reports filesystem disk space usage.  
   	- Used for checking disk space availability.
+	<your-example>
 
 - **`du`**: 
 	- Estimates file and directory space usage.  
   	- Used for identifying disk usage by files and directories.
+	<your-example>
 
 - **`free`**: 
 	- Displays the amount of free and used memory in the system.  
   	- Used for monitoring memory usage.
+	<your-example>
 
 - **`vmstat`**: 
 	- Reports virtual memory statistics.  
   	- Used for monitoring system performance.
+	<your-example>
 
 - **`uptime`**: 
 	- Tells how long the system has been running.  
   	- Used for checking system uptime.
+	<your-example>
 
 - **`dmesg`**: 
 	- Prints kernel ring buffer messages.  
   	- Used for viewing system boot and diagnostic messages.
+	<your-example>
 
 - **`lscpu`**: 
 	- Displays information about the CPU architecture.  
   	- Used for checking CPU details.
+	<your-example>
 
 - **`lsblk`**: 
 	- Lists information about block devices.  
   	- Used for viewing storage device details.
+	<your-example>
 
 - **`lsusb`**: 
 	- Lists USB devices.  
   	- Used for checking connected USB devices.
+	<your-example>
 
 - **`lspci`**: 
 	- Lists PCI devices.  
   	- Used for viewing connected PCI devices.
+	<your-example>
 
 - **`hostnamectl`**: 
 	- Controls the system hostname.  
   	- Used for setting or querying the system's hostname.
+	<your-example>
 
 - **`timedatectl`**: 
 	- Controls the system time and date.  
   	- Used for setting or querying system time settings.
 
 #### Software installation and management
+	<your-example>
 
 - **`apt`**: 
 	- High-level package management command for Debian-based distributions.  
   	- Used for managing software packages on Debian-based systems.
+	<your-example>
 
 - **`yum`**: 
 	- Package manager for RPM-based distributions.  
   	- Used for managing software packages on Red Hat-based systems.
+	<your-example>
 
 - **`dnf`**: 
 	- Next-generation package manager for RPM-based distributions.  
   	- Replacement for `yum`.
+	<your-example>
 
 - **`rpm`**: 
 	- RPM package manager.  
   	- Used for installing, querying, and managing RPM packages.
+	<your-example>
 
 - **`snap`**: 
 	- Package management system for installing snap packages.  
   	- Used for managing snap packages across Linux distributions.
+	<your-example>
 
 - **`flatpak`**: 
 	- System for building, distributing, and running sandboxed desktop applications.  
   	- Used for managing Flatpak packages.
 
 #### Kernel module management
+	<your-example>
 
 - **`lsmod`**: 
 	- Shows the status of modules in the Linux Kernel.  
   	- Used for listing currently loaded kernel modules.
+	<your-example>
 
 - **`modprobe`**: 
 	- Adds and removes modules from the Linux kernel.  
   	- Used for managing kernel modules.
+	<your-example>
 
 - **`insmod`**: 
 	- Inserts a module into the Linux kernel.  
   	- Used for loading a single module.
+	<your-example>
 
 - **`rmmod`**: 
 	- Removes a module from the Linux kernel.  
   	- Used for unloading a single module.
+	<your-example>
 
 - **`modinfo`**: 
 	- Shows information about a Linux Kernel module.  
   	- Used for querying details of kernel modules.
+	<your-example>
 
 - **`depmod`**: 
 	- Generates modules.dep and map files.  
   	- Used for creating dependency files for kernel modules.
 
 #### Boot process and system recovery
+	<your-example>
 
 - **`grub`**: 
 	- GRand Unified Bootloader, used for booting the system.  
   	- Used for managing boot configurations.
+	<your-example>
 
 - **`grub2-mkconfig`**: 
 	- Generates a GRUB2 configuration file.  
   	- Used for creating GRUB2 configuration.
+	<your-example>
 
 - **`update-grub`**: 
 	- Updates GRUB bootloader configuration.  
   	- Used for applying changes to GRUB.
+	<your-example>
 
 - **`systemctl`**: 
 	- Controls the systemd system and service manager.  
   	- Used for managing system services and targets.
+	<your-example>
 
 - **`journalctl`**: 
 	- Queries and displays messages from the journal.  
   	- Used for viewing system logs.
+	<your-example>
 
 - **`rescue.target`**: 
 	- Boots the system into rescue mode.  
   	- Used for system recovery.
+	<your-example>
 
 - **`emergency.target`**: 
 	- Boots the system into emergency mode.  
   	- Used for critical system recovery.
+	<your-example>
 
 - **`initramfs`**: 
 	- Initial RAM filesystem used during boot.  
   	- Used for pre-boot filesystem setup.
+	<your-example>
 
 - **`dracut`**: 
 	- Tool for creating initramfs images.  
   	- Used for generating initramfs.
 
 #### Shell scripting
+	<your-example>
 
 - **`bash`**: 
 	- GNU Bourne Again SHell, command processor.  
   	- Used for writing and executing shell scripts.
+	<your-example>
 
 - **`sh`**: 
 	- Shell command interpreter.  
   	- Basic shell scripting environment.
+	<your-example>
 
 - **`#!/bin/bash`**: 
 	- Shebang line for bash scripts.  
   	- Used at the beginning of shell scripts to specify the interpreter.
+	<your-example>
 
 - **`echo`**: 
 	- Displays a line of text.  
   	- Commonly used for outputting text in scripts.
+	<your-example>
 
 - **`read`**: 
 	- Reads a line of input.  
   	- Used for getting user input in scripts.
+	<your-example>
 
 - **`if`**: 
 	- Conditional statement.  
   	- Used for decision making in scripts.
+	<your-example>
 
 - **`else`**: 
 	- Alternative conditional branch.  
   	- Used with `if` for branching logic.
+	<your-example>
 
 - **`fi`**: 
 	- Ends an `if` statement.  
   	- Used to close conditional blocks.
+	<your-example>
 
 - **`for`**: 
 	- Looping statement.  
   	- Used for iterating over items.
+	<your-example>
 
 - **`while`**: 
 	- Looping statement.  
   	- Used for repeating a block of commands while a condition is true.
+	<your-example>
 
 - **`case`**: 
 	- Multi-way branch statement.  
   	- Used for matching patterns.
+	<your-example>
 
 - **`esac`**: 
 	- Ends a `case` statement.  
   	- Used to close case blocks.
+	<your-example>
 
 - **`function`**: 
 	- Defines a function.  
   	- Used for creating reusable code blocks.
+	<your-example>
 
 - **`$?`**: 
 	- Returns the exit status of the last command.  
   	- Used for checking command success or failure.
+	<your-example>
 
 - **`$0`**: 
 	- Name of the script.  
   	- Used for referencing the script name.
+	<your-example>
 
 - **`$1`, `$2`, ...**: 
 	- Positional parameters.  
   	- Used for accessing script arguments.
+	<your-example>
 
 - **`$#`**: 
 	- Number of positional parameters.  
   	- Used for counting script arguments.
+	<your-example>
 
 - **`$@`**: 
 	- All positional parameters.  
   	- Used for accessing all arguments.
+	<your-example>
 
 - **`shift`**: 
 	- Shifts positional parameters.  
   	- Used for processing script arguments.
 
 #### Create and restore system snapshots and backups
+	<your-example>
 
 - **`rsync`**: 
 	- Remote file and directory synchronization.  
   	- Used for copying and syncing files efficiently.
+	<your-example>
 
 - **`tar`**: 
 	- Archives files.  
   	- Used for creating and extracting backups.
 
 
+	<your-example>
 
 - **`dd`**: 
 	- Converts and copies files.  
   	- Used for low-level copying and disk imaging.
+	<your-example>
 
 - **`cp`**: 
 	- Copies files and directories.  
   	- Used for duplicating data for backups.
+	<your-example>
 
 - **`scp`**: 
 	- Secure copy (remote file copy program).  
   	- Used for securely copying files over a network.
+	<your-example>
 
 - **`sftp`**: 
 	- Secure File Transfer Protocol.  
   	- Used for transferring files securely.
+	<your-example>
 
 - **`btrfs`**: 
 	- B-tree Filesystem with snapshot capabilities.  
   	- Used for creating and managing filesystem snapshots.
+	<your-example>
 
 - **`zfs`**: 
 	- Zettabyte File System with advanced features like snapshots.  
