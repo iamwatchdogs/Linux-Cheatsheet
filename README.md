@@ -629,56 +629,148 @@
   # Check service status
   systemctl status service-name
   ```
-#### Recover from hardware, operating system, or filesystem failures
 
-- **`fsck`**: 
-	- Filesystem consistency check and repair.  
-  	- Used to check and repair filesystem errors.
-	<your-example>
+### Recover from hardware, operating system, or filesystem failures
 
-- **`e2fsck`**: 
-	- Filesystem consistency check for ext2/ext3/ext4 filesystems.  
-  	- Commonly used for checking and fixing ext filesystems.
-	<your-example>
+#### **`fsck`** 
+- Filesystem consistency check and repair.
+- Used to check and repair filesystem errors.
+```sh
+# Check and repair the filesystem on /dev/sda1
+fsck /dev/sda1
 
-- **`dd`**: 
-	- Utility to convert and copy files at a low level.  
-  	- Used for creating disk images and backups.
-	<your-example>
+# Check the filesystem on /dev/sda1 without making changes
+fsck -n /dev/sda1
 
-- **`smartctl`**: 
-	- Controls and monitors storage devices using S.M.A.R.T.  
-  	- Used for checking hard drive health.
-	<your-example>
+# Automatically fix any detected errors on /dev/sda1
+fsck -y /dev/sda1
+```
 
-- **`mdadm`**: 
-	- Manages MD (multiple device) software RAID arrays.  
-  	- Used for creating, assembling, and monitoring RAID arrays.
-	<your-example>
+#### **`e2fsck`**
+- Filesystem consistency check for ext2/ext3/ext4 filesystems.
+- Commonly used for checking and fixing ext filesystems.
+```sh
+# Check and repair ext4 filesystem on /dev/sda2
+e2fsck /dev/sda2
 
-- **`dracut`**: 
-	- Tool for generating initramfs images.  
-  	- Used for creating initial ramdisk environments.
-	<your-example>
+# Check the filesystem on /dev/sda2 without making changes
+e2fsck -n /dev/sda2
 
-- **`initrd`**: 
-	- Initial ramdisk used by the Linux kernel during boot.  
-  	- Essential for loading necessary drivers before mounting the root filesystem.
-	<your-example>
+# Automatically fix any detected errors on /dev/sda2
+e2fsck -p /dev/sda2
+```
 
-- **`grub`**: 
-	- GRand Unified Bootloader, manages boot configurations.  
-  	- Used for bootloader management and configuration.
-	<your-example>
+#### **`dd`**
+- Utility to convert and copy files at a low level.
+- Used for creating disk images and backups.
+```sh
+# Create a disk image of /dev/sda and save it as sda.img
+dd if=/dev/sda of=/path/to/sda.img
 
-- **`rescue mode`**: 
-	- Special boot mode for system recovery.  
-  	- Used to troubleshoot and repair system boot issues.
-	<your-example>
+# Write an image file to a USB drive
+dd if=/path/to/image.iso of=/dev/sdb bs=4M
 
-- **`systemctl rescue`**: 
-	- Boots the system into rescue mode using systemd.  
-  	- Used for minimal system repair tasks.
+# Clone one disk to another
+dd if=/dev/sda of=/dev/sdb
+```
+
+#### **`smartctl`**
+- Controls and monitors storage devices using S.M.A.R.T.
+- Used for checking hard drive health.
+```sh
+# Display basic S.M.A.R.T. information for /dev/sda
+smartctl -i /dev/sda
+
+# Perform a short self-test on /dev/sda
+smartctl -t short /dev/sda
+
+# Display detailed S.M.A.R.T. health information for /dev/sda
+smartctl -a /dev/sda
+```
+
+#### **`mdadm`**
+- Manages MD (multiple device) software RAID arrays.
+- Used for creating, assembling, and monitoring RAID arrays.
+```sh
+# Create a RAID 1 array with two devices
+mdadm --create --verbose /dev/md0 --level=1 --raid-devices=2 /dev/sda /dev/sdb
+
+# Assemble a RAID array from existing devices
+mdadm --assemble /dev/md0 /dev/sda /dev/sdb
+
+# Monitor the status of a RAID array
+mdadm --detail /dev/md0
+```
+
+#### **`dracut`**
+- Tool for generating initramfs images.
+- Used for creating initial ramdisk environments.
+```sh
+# Generate an initramfs image for the current kernel
+dracut --force
+
+# Generate an initramfs image for a specific kernel version
+dracut --kver 5.8.0-1-amd64 --force
+
+# Include additional drivers in the initramfs image
+dracut --add-drivers "driver1 driver2" --force
+```
+
+#### **`initrd`**
+- Initial ramdisk used by the Linux kernel during boot.
+- Essential for loading necessary drivers before mounting the root filesystem.
+```sh
+# Create an initrd image with mkinitrd (specific to some distributions)
+mkinitrd /boot/initrd.img-5.8.0-1-amd64 5.8.0-1-amd64
+
+# List the contents of an initrd image
+lsinitrd /boot/initrd.img-5.8.0-1-amd64
+
+# Update the initrd image for the current kernel
+update-initramfs -u
+```
+
+#### **`grub`**
+- GRand Unified Bootloader, manages boot configurations.
+- Used for bootloader management and configuration.
+```sh
+# Update GRUB configuration after making changes
+update-grub
+
+# Install GRUB on the MBR of /dev/sda
+grub-install /dev/sda
+
+# Open GRUB configuration file for editing
+nano /etc/default/grub
+```
+
+#### **`rescue mode`**
+- Special boot mode for system recovery.
+- Used to troubleshoot and repair system boot issues.
+```sh
+# Boot into rescue mode from the GRUB menu
+Select the "Advanced options" entry, then the "Rescue mode" entry
+
+# From the boot prompt, enter rescue mode directly
+systemctl rescue
+
+# Using a live CD/USB, select the rescue mode option to boot into a recovery environment
+Boot the live CD/USB and select "Rescue a broken system"
+```
+
+#### **`systemctl rescue`**
+- Boots the system into rescue mode using systemd.
+- Used for minimal system repair tasks.
+```sh
+# Enter rescue mode immediately
+systemctl rescue
+
+# Reboot into rescue mode
+systemctl reboot --force --force rescue.target
+
+# Switch to rescue mode without rebooting
+systemctl isolate rescue.target
+```
 
 #### Manage Virtual Machines (libvirt)
 
