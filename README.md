@@ -885,80 +885,214 @@ systemctl isolate rescue.target
 #### Configure container engines, create and manage containers
 
 - **`docker`**: 
-	- Containerization platform for developing, shipping, and running applications.  
-  	- Used for creating, managing, and running containers.
-	<your-example>
+	- Containerization platform for developing, shipping, and running applications.
+	- Used for creating, managing, and running containers.
+	```sh
+	# Create and run a new container
+	docker run -d -p 80:80 --name webserver nginx
+
+	# List all running containers
+	docker ps
+
+	# Build a Docker image from a Dockerfile
+	docker build -t myimage:latest .
+	```
 
 - **`podman`**: 
-	- Daemonless container engine for managing OCI containers.  
-  	- Used as a Docker alternative for container management.
-	<your-example>
+	- Daemonless container engine for managing OCI containers.
+	- Used as a Docker alternative for container management.
+	```sh
+	# Create and run a new container
+	podman run -d -p 80:80 --name webserver nginx
+
+	# List all running containers
+	podman ps
+
+	# Build a container image from a Containerfile
+	podman build -t myimage:latest .
+	```
 
 - **`buildah`**: 
-	- Tool for building OCI images.  
-  	- Used for creating and managing container images.
-	<your-example>
+	- Tool for building OCI images.
+	- Used for creating and managing container images.
+	```sh
+	# Create a new image from a Dockerfile
+	buildah bud -t myimage:latest .
+
+	# Inspect an image
+	buildah inspect myimage:latest
+
+	# Push an image to a remote registry
+	buildah push myimage:latest docker://registry.example.com/myimage:latest
+	```
 
 - **`crictl`**: 
-	- CLI for CRI-compatible container runtimes.  
-  	- Used for interacting with container runtimes in Kubernetes environments.
-	<your-example>
+	- CLI for CRI-compatible container runtimes.
+	- Used for interacting with container runtimes in Kubernetes environments.
+	```sh
+	# List all containers
+	crictl ps
+
+	# Inspect a specific container
+	crictl inspect <container_id>
+
+	# Pull an image from a remote registry
+	crictl pull nginx:latest
+	```
 
 - **`kubectl`**: 
-	- CLI for Kubernetes cluster management.  
-  	- Used for deploying, managing, and inspecting applications in Kubernetes.
-	<your-example>
+	- CLI for Kubernetes cluster management.
+	- Used for deploying, managing, and inspecting applications in Kubernetes.
+	```sh
+	# Apply a configuration to a Kubernetes cluster
+	kubectl apply -f deployment.yaml
+
+	# Get the status of all pods
+	kubectl get pods
+
+	# Describe a specific pod
+	kubectl describe pod <pod_name>
+	```
 
 - **`docker-compose`**: 
-	- Tool for defining and running multi-container Docker applications.  
-  	- Used for orchestrating multi-container deployments.
-	<your-example>
+	- Tool for defining and running multi-container Docker applications.
+	- Used for orchestrating multi-container deployments.
+	```sh
+	# Start up defined services
+	docker-compose up
+
+	# Stop all running services
+	docker-compose down
+
+	# View the logs of all services
+	docker-compose logs
+	```
 
 - **`docker build`**: 
-	- Builds a Docker image from a Dockerfile.  
-  	- Used for creating container images.
-	<your-example>
+	- Builds a Docker image from a Dockerfile.
+	- Used for creating container images.
+	```sh
+	# Build an image from a Dockerfile
+	docker build -t myimage:latest .
+
+	# Build an image with a specific build context
+	docker build -t myimage:latest /path/to/context
+
+	# Build an image with no cache
+	docker build --no-cache -t myimage:latest .
+	```
 
 - **`docker run`**: 
-	- Runs a command in a new Docker container.  
-  	- Used for starting containers from images.
-	<your-example>
+	- Runs a command in a new Docker container.
+	- Used for starting containers from images.
+	```sh
+	# Run a container from an image
+	docker run -d -p 80:80 --name webserver nginx
+
+	# Run a container interactively
+	docker run -it ubuntu bash
+
+	# Run a container with environment variables
+	docker run -d -e ENV_VAR=value --name app myapp:latest
+	```
 
 - **`docker ps`**: 
-	- Lists running Docker containers.  
-  	- Used for monitoring active containers.
-	<your-example>
+	- Lists running Docker containers.
+	- Used for monitoring active containers.
+	```sh
+	# List all running containers
+	docker ps
 
-- **
+	# List all containers (running and stopped)
+	docker ps -a
 
-`docker images`**: 
-	- Lists Docker images on the host.  
-  	- Used for managing local container images.
-	<your-example>
+	# List running containers with format options
+	docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+	```
+
+- **`docker images`**: 
+	- Lists Docker images on the host.
+	- Used for managing local container images.
+	```sh
+	# List all images
+	docker images
+
+	# List images with a specific format
+	docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}"
+
+	# List images with a filter
+	docker images --filter "dangling=true"
+	```
 
 - **`docker network`**: 
-	- Manages Docker networks.  
-  	- Used for creating and managing container networks.
-	<your-example>
+	- Manages Docker networks.
+	- Used for creating and managing container networks.
+	```sh
+	# List all Docker networks
+	docker network ls
+
+	# Create a new network
+	docker network create mynetwork
+
+	# Inspect a specific network
+	docker network inspect mynetwork
+	```
 
 - **`docker volume`**: 
-	- Manages Docker volumes.  
-  	- Used for handling persistent storage for containers.
-	<your-example>
+	- Manages Docker volumes.
+	- Used for handling persistent storage for containers.
+	```sh
+	# List all Docker volumes
+	docker volume ls
+
+	# Create a new volume
+	docker volume create myvolume
+
+	# Inspect a specific volume
+	docker volume inspect myvolume
+	```
 
 - **`docker inspect`**: 
-	- Displays detailed information about Docker objects.  
-  	- Used for troubleshooting and examining containers.
-	<your-example>
+	- Displays detailed information about Docker objects.
+	- Used for troubleshooting and examining containers.
+	```sh
+	# Inspect a specific container
+	docker inspect <container_id>
+
+	# Inspect a specific image
+	docker inspect <image_id>
+
+	# Inspect a specific network
+	docker inspect <network_id>
+	```
 
 - **`podman run`**: 
-	- Runs a command in a new podman container.  
-  	- Used similarly to `docker run` but without a daemon.
-	<your-example>
+	- Runs a command in a new podman container.
+	- Used similarly to `docker run` but without a daemon.
+	```sh
+	# Run a container from an image
+	podman run -d -p 80:80 --name webserver nginx
+
+	# Run a container interactively
+	podman run -it ubuntu bash
+
+	# Run a container with environment variables
+	podman run -d -e ENV_VAR=value --name app myapp:latest
+	```
 
 - **`podman ps`**: 
-	- Lists running podman containers.  
-  	- Used for monitoring podman-managed containers.
+	- Lists running podman containers.
+	- Used for monitoring podman-managed containers.
+	```sh
+	# List all running containers
+	podman ps
+
+	# List all containers (running and stopped)
+	podman ps -a
+
+	# List running containers with format options
+	podman ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+	```
 
 #### Create and enforce MAC using SELinux
 
