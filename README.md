@@ -7,18 +7,63 @@
 - **`sysctl`**: 
 	- Command to modify kernel parameters at runtime.  
   	- Commonly used in performance tuning and setting network-related parameters.
+	```sh
+	# View the current value of a kernel parameter
+	sysctl net.ipv4.ip_forward
+	
+	# List all current kernel parameters and their values
+	sysctl -a
+	
+	# Load settings from a specified configuration file
+	sysctl -p /path/to/your/sysctl.conf
+	```
 
 - **`/etc/sysctl.conf`**: 
 	- Configuration file for kernel parameters that are read at boot.  
   	- Used for setting persistent kernel parameter changes.
+	```sh
+	# Enable IP forwarding (persistently)
+	# Add the following line to /etc/sysctl.conf
+	net.ipv4.ip_forward = 1
+	
+	# Set the maximum number of open files (persistently)
+	# Add the following line to /etc/sysctl.conf
+	fs.file-max = 100000
+	
+	# Increase the size of the receive buffer (persistently)
+	# Add the following line to /etc/sysctl.conf
+	net.core.rmem_max = 16777216
+	```
 
 - **`sysctl -w`**: 
 	- Option to set kernel parameters dynamically.  
   	- Typically used for temporary changes that don't require a reboot.
-
+	```sh
+	# Enable IP forwarding (non-persistently)
+	sysctl -w net.ipv4.ip_forward=1
+	
+	# Set the maximum number of open files (non-persistently)
+	sysctl -w fs.file-max=100000
+	
+	# Increase the size of the receive buffer (non-persistently)
+	sysctl -w net.core.rmem_max=16777216
+	```
 - **`/etc/sysctl.d/`**: 
 	- Directory for additional kernel parameter configuration files.  
   	- Used for organizing kernel parameter settings in a modular way.
+	```sh
+	# Enable IP forwarding (persistently)
+	# Create a file /etc/sysctl.d/99-ipforward.conf with the following content
+	net.ipv4.ip_forward = 1
+	
+	# Set the maximum number of open files (persistently)
+	# Create a file /etc/sysctl.d/99-filemax.conf with the following content
+	fs.file-max = 100000
+	
+	# Increase the size of the receive buffer (persistently)
+	# Create a file /etc/sysctl.d/99-rmemmax.conf with the following content
+	net.core.rmem_max = 16777216
+	```
 
 #### Diagnose, identify, manage, and troubleshoot processes and services
 
