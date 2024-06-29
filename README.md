@@ -12,10 +12,10 @@
 	# View the current value of a kernel parameter
 	sysctl net.ipv4.ip_forward
 	
-	# List all current kernel parameters and their values
+	# List all current kerneparameters and their values
 	sysctl -a
 	
-	# Load settings from a specified configuration file
+	# Load ttings from a specified configuration file
 	sysctl -p /path/to/your/sysctl.conf
 	```
 
@@ -27,11 +27,11 @@
 	# Add the following line to /etc/sysctl.conf
 	net.ipv4.ip_forward = 1
 	
-	# Set the maximum number of open files (persistently)
+	# Set the maximum numr of open files (persistently)
 	# Add the following line to /etc/sysctl.conf
 	fs.file-max = 100000
 	
-	# Increase the size of the receive buffer (persistently)
+	# Increase the sizof the receive buffer (persistently)
 	# Add the following line to /etc/sysctl.conf
 	net.core.rmem_max = 16777216
 	```
@@ -43,10 +43,10 @@
 	# Enable IP forwarding (non-persistently)
 	sysctl -w net.ipv4.ip_forward=1
 	
-	# Set the maximum number of open files (non-persistently)
+	# Set the maximum number of on files (non-persistently)
 	sysctl -w fs.file-max=100000
 	
-	# Increase the size of the receive buffer (non-persistently)
+	# Increase the size of theeceive buffer (non-persistently)
 	sysctl -w net.core.rmem_max=16777216
 	<your-example>
 	```
@@ -58,11 +58,11 @@
 	# Create a file /etc/sysctl.d/99-ipforward.conf with the following content
 	net.ipv4.ip_forward = 1
 	
-	# Set the maximum number of open files (persistently)
+	# Set the maximum numr of open files (persistently)
 	# Create a file /etc/sysctl.d/99-filemax.conf with the following content
 	fs.file-max = 100000
 	
-	# Increase the size of the receive buffer (persistently)
+	# Increase the sizof the receive buffer (persistently)
 	# Create a file /etc/sysctl.d/99-rmemmax.conf with the following content
 	net.core.rmem_max = 16777216
 	```
@@ -77,13 +77,13 @@
 	# List all processes currently running
 	ps -e
 	
-	# Display detailed information about processes
+	# Dplay detailed information about processes
 	ps aux
 	
-	# Display processes for a specific user
+	# Dilay processes for a specific user
 	ps -u username
 	
-	# List processes in a tree format
+	# List procees in a tree format
 	ps -e --forest
 	```
 
@@ -94,13 +94,13 @@
 	# Start top to monitor system processes in real-time
 	top
 	
-	# Start top with batch mode operation for logging purposes
+	#tart top with batch mode operation for logging purposes
 	top -b
 	
-	# Display top output sorted by memory usage
+	# Dilay top output sorted by memory usage
 	top -o %MEM
 	
-	# Display top output with only specific user processes
+	# Displayop output with only specific user processes
 	top -u username
 	```
 
@@ -111,13 +111,13 @@
 	# Start htop to monitor system processes with an interactive UI
 	htop
 	
-	# Start htop sorted by CPU usage
+	# art htop sorted by CPU usage
 	htop --sort-key PERCENT_CPU
 	
-	# Display only processes of a specific user
+	# Display only processes  a specific user
 	htop -u username
 	
-	# Filter processes by command name
+	# Filter procees by command name
 	htop -p $(pgrep -d ',' process_name)
 	```
 
@@ -128,16 +128,16 @@
 	# Check the status of a service
 	systemctl status apache2
 	
-	# Start a service
+	# Start a servi
 	systemctl start apache2
 	
-	# Stop a service
+	# Stop a servi
 	systemctl stop apache2
 	
-	# Enable a service to start on boot
+	# Enable a service tstart on boot
 	systemctl enable apache2
 	
-	# Reload systemd manager configuration
+	# Reload systemd manag configuration
 	systemctl daemon-reload
 	```
 
@@ -148,13 +148,13 @@
 	# Start a service
 	service apache2 start
 	
-	# Stop a service
+	# Stop a servi
 	service apache2 stop
 	
-	# Restart a service
+	# Restart a servi
 	service apache2 restart
 	
-	# Check the status of a service
+	# Check the status of service
 	service apache2 status
 	```
 
@@ -165,13 +165,13 @@
 	# View the entire system journal
 	journalctl
 	
-	# View journal logs for a specific service
+	# View jrnal logs for a specific service
 	journalctl -u apache2
 	
-	# View logs since the last boot
+	# View logs since t last boot
 	journalctl -b
 	
-	# Follow new journal entries in real-time
+	# Follow nejournal entries in real-time
 	journalctl -f
 	```
 
@@ -182,13 +182,13 @@
 	# Trace system calls and signals of a command
 	strace ls
 	
-	# Trace a running process by PID
+	# Trace running process by PID
 	strace -p 1234
 	
-	# Save strace output to a file
+	# Save stracoutput to a file
 	strace -o output.txt ls
 	
-	# Trace only file-related system calls
+	# Trace only file-reled system calls
 	strace -e trace=file ls
 	```
 
@@ -199,13 +199,13 @@
 	# Print the kernel ring buffer messages
 	dmesg
 	
-	# View dmesg output in a less pager
+	# Vw dmesg output in a less pager
 	dmesg | less
 	
-	# Filter dmesg output for errors
+	# Filter dsg output for errors
 	dmesg | grep -i error
 	
-	# Clear the kernel ring buffer
+	# Clear the kernel ng buffer
 	dmesg -C
 	```
 
@@ -216,13 +216,13 @@
 	# Kill a process by PID
 	kill 1234
 	
-	# Send a specific signal to a process
+	# Send specific signal to a process
 	kill -9 1234
 	
-	# Kill all processes with a specific name
+	# Kill allrocesses with a specific name
 	pkill -f process_name
 	
-	# List available signals
+	# List available sials
 	kill -l
 	```
 
@@ -233,13 +233,13 @@
 	# Kill processes by name
 	pkill apache2
 	
-	# Send a specific signal to processes by name
+	# Send a spific signal to processes by name
 	pkill -9 apache2
 	
-	# Kill processes owned by a specific user
+	# Kill process owned by a specific user
 	pkill -u username
 	
-	# Kill processes matching a pattern
+	# Kill processematching a pattern
 	pkill -f pattern
 	```
 
@@ -250,13 +250,13 @@
 	# List process IDs by name
 	pgrep apache2
 	
-	# List process IDs by name and user
+	# List procs IDs by name and user
 	pgrep -u username apache2
 	
-	# List process IDs with full command matching
+	# List process IDs withull command matching
 	pgrep -f pattern
 	
-	# List process IDs with extended regular expression
+	# List processDs with extended regular expression
 	pgrep -e pattern
 	```
 
@@ -267,10 +267,10 @@
 	# Get the PID of a running program
 	pidof apache2
 	
-	# Get the PIDs of a running program with multiple instances
+	# Get the Ps of a running program with multiple instances
 	pidof -x apache2
 	
-	# Get the PID of a running program with partial name match
+	# Get the PID  a running program with partial name match
 	pidof -c partial_name
 	```
 
@@ -281,13 +281,13 @@
 	# List all open files
 	lsof
 	
-	# List open files by a specific process
+	# st open files by a specific process
 	lsof -p 1234
 	
-	# List open files by a specific user
+	# List opefiles by a specific user
 	lsof -u username
 	
-	# List open files by a specific network port
+	# List open fis by a specific network port
 	lsof -i :80
 	```
 
@@ -298,13 +298,13 @@
 	# Display network connections, routing tables, interface statistics
 	netstat -a
 	
-	# Display network connections with process information
+	# Displanetwork connections with process information
 	netstat -tpn
 	
-	# Display listening ports
+	# Display stening ports
 	netstat -l
 	
-	# Display routing table
+	# Displarouting table
 	netstat -r
 	```
 
@@ -315,16 +315,16 @@
 	# Display all sockets
 	ss -a
 	
-	# Display listening sockets
+	# Dplay listening sockets
 	ss -l
 	
-	# Display TCP connections
+	# Dplay TCP connections
 	ss -t
 	
-	# Display UDP connections
+	# Dplay UDP connections
 	ss -u
 	
-	# Display summary statistics
+	# Dplay summary statistics
 	ss -s
 	```
 
@@ -974,56 +974,157 @@ systemctl isolate rescue.target
 - **`ip`**: 
 	- Command for managing network interfaces and routes.  
   	- Used for configuring IP addresses, routes, and tunnels.
-	<your-example>
+	```sh
+	# Assign an IP address to an interface
+	sudo ip addr add 192.168.1.10/24 dev eth0
+
+	# Show the current IP addresses
+	ip addr show
+
+	# Add a default gateway
+	sudo ip route add default via 192.168.1.1
+	```
 
 - **`ifconfig`**: 
 	- Legacy tool for configuring network interfaces.  
   	- Often replaced by `ip` but still used in some scripts and systems.
-	<your-example>
+	```sh
+	# Display all network interfaces and their current status
+	ifconfig
+
+	# Assign an IP address to an interface
+	sudo ifconfig eth0 192.168.1.10 netmask 255.255.255.0
+
+	# Bring an interface up or down
+	sudo ifconfig eth0 up
+	sudo ifconfig eth0 down
+	```
 
 - **`nmcli`**: 
 	- Command-line interface for NetworkManager.  
   	- Used for managing network connections and devices.
-	<your-example>
+	```sh
+	# Display all network connections
+	nmcli con show
+
+	# Connect to a Wi-Fi network
+	nmcli dev wifi connect "SSID_NAME" password "PASSWORD"
+
+	# Add a new static IP connection
+	nmcli con add type ethernet ifname eth0 con-name static-eth0 ip4 192.168.1.10/24 gw4 192.168.1.1
+	```
 
 - **`nmtui`**: 
 	- Text user interface for NetworkManager.  
   	- Provides a simpler interface for managing network settings.
-	<your-example>
+	```sh
+	# Launch the nmtui interface
+	sudo nmtui
+
+	# Edit a connection via nmtui
+	# Use the interactive interface to select and edit connections
+
+	# Activate a connection via nmtui
+	# Use the interactive interface to activate connections
+	```
 
 - **`hostnamectl`**: 
 	- Controls the system hostname.  
   	- Used for setting the system's hostname and related settings.
-	<your-example>
+	```sh
+	# Set the system hostname
+	sudo hostnamectl set-hostname new-hostname
+
+	# Check the current hostname
+	hostnamectl
+
+	# Set a transient hostname
+	sudo hostnamectl set-hostname temporary-hostname --transient
+	```
 
 - **`systemctl restart network`**: 
 	- Restarts the network service.  
   	- Used to apply network configuration changes.
-	<your-example>
+	```sh
+	# Restart the network service on a CentOS/RHEL system
+	sudo systemctl restart network
+
+	# Check the status of the network service
+	sudo systemctl status network
+
+	# Enable the network service to start on boot
+	sudo systemctl enable network
+	```
 
 - **`/etc/hosts`**: 
 	- Static table lookup for hostnames.  
   	- Used for local hostname resolution.
-	<your-example>
+	```sh
+	# Add a new hostname to the /etc/hosts file
+	echo "192.168.1.10 myhostname" | sudo tee -a /etc/hosts
+
+	# View the contents of the /etc/hosts file
+	cat /etc/hosts
+
+	# Remove an entry from the /etc/hosts file
+	sudo sed -i '/192.168.1.10 myhostname/d' /etc/hosts
+	```
 
 - **`/etc/resolv.conf`**: 
 	- Configuration file for DNS resolution.  
   	- Used for setting DNS servers and search domains.
-	<your-example>
+	```sh
+	# Add a new DNS server to /etc/resolv.conf
+	echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
+
+	# Set a search domain in /etc/resolv.conf
+	echo "search example.com" | sudo tee -a /etc/resolv.conf
+
+	# View the contents of /etc/resolv.conf
+	cat /etc/resolv.conf
+	```
 
 - **`ping`**: 
 	- Sends ICMP ECHO_REQUEST to network hosts.  
   	- Used for checking network connectivity.
-	<your-example>
+	```sh
+	# Ping a remote host to check connectivity
+	ping google.com
+
+	# Ping a remote host with a specified number of packets
+	ping -c 4 google.com
+
+	# Ping a remote host with IPv6
+	ping6 google.com
+	```
 
 - **`traceroute`**: 
 	- Traces the route packets take to a network host.  
   	- Used for diagnosing network path issues.
-	<your-example>
+	```sh
+	# Trace the route to a remote host
+	traceroute google.com
+
+	# Trace the route to a remote host using IPv6
+	traceroute6 google.com
+
+	# Trace the route to a remote host with a specified number of queries per hop
+	traceroute -q 2 google.com
+	```
 
 - **`netplan`**: 
 	- Network configuration tool for Ubuntu.  
   	- Used for configuring network settings via YAML files.
+	```sh
+	# Generate network configuration from netplan
+	sudo netplan generate
+
+	# Apply network configuration changes
+	sudo netplan apply
+
+	# Test netplan configuration
+	sudo netplan try
+	```
 
 #### Set and synchronize system time using time servers
 
