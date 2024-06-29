@@ -325,170 +325,217 @@
 	ss -s
 	```
 
-#### Manage or schedule jobs for executing commands
+### Search for, install, validate, and maintain software packages or repositories
 
-- **`cron`**: 
-	- Daemon to execute scheduled commands.
-	- Commonly used for recurring task automation.
-	```sh
-	Schedule a daily backup at 2 AM
-	0 2 * * * /path/to/backup/script.sh
+#### **`yum`**
+- Package manager for RPM-based distributions.
+- Used for installing, updating, and removing packages.
+```
+# Install a package
+yum install package_name
 
-	Schedule a script to run every 5 minutes
-	*/5 * * * * /path/to/script.sh
-	```
+# Remove a package
+yum remove package_name
 
-- **`crontab`**: 
-	- Command to manage cron job schedules.
-	- Used to set up, edit, and list scheduled tasks.
-	```sh
-	List current user's cron jobs
-	crontab -l
+# Update all packages
+yum update
+```
 
-	Edit the current user's cron jobs
-	crontab -e
-	```
+#### **`dnf`**
+- Next-generation package manager for RPM-based distributions.
+- Replaces `yum` with enhanced features and performance.
+```
+# Install a package
+dnf install package_name
 
-- **`at`**: 
-	- Schedules commands to run once at a specified time.
-	- Useful for one-time task automation.
-	```sh
-	Schedule a script to run at 3 PM today
-	echo "/path/to/script.sh" | at 15:00
+# Remove a package
+dnf remove package_name
 
-	Schedule a command to run at midnight
-	echo "echo 'Happy New Year!'" | at midnight
-	```
+# Upgrade the system
+dnf upgrade
+```
 
-- **`batch`**: 
-	- Queues commands to run when system load levels permit.
-	- Used for batch processing during low system load.
-	```sh
-	Queue a script to run when load is low
-	echo "/path/to/script.sh" | batch
+#### **`apt`**
+- Package manager for Debian-based distributions.
+- Commonly used for managing .deb packages.
+```
+# Install a package
+apt install package_name
 
-	Queue a command to run when the system is not busy
-	echo "tar -czf /backup/data.tar.gz /data" | batch
-	```
+# Remove a package
+apt remove package_name
 
-- **`systemd timers`**: 
-	- Timer units for scheduling tasks in systemd.
-	- Preferred in systemd-based systems for task automation.
-	```sh
-	Create a timer to run a service daily
-	# Create a .service file
-	[Unit]
-	Description=Daily Backup Service
+# Update package lists and upgrade all packages
+apt update && apt upgrade
+```
 
-	[Service]
-	Type=oneshot
-	ExecStart=/path/to/backup/script.sh
+#### **`rpm`**
+- Package manager for RPM packages.
+- Used for installing, querying, verifying, updating, and removing RPM packages.
+```
+# Install an RPM package
+rpm -ivh package_name.rpm
 
-	# Create a .timer file
-	[Unit]
-	Description=Run backup script daily
+# Query installed packages
+rpm -qa
 
-	[Timer]
-	OnCalendar=daily
-	Persistent=true
+# Remove an RPM package
+rpm -e package_name
+```
 
-	[Install]
-	WantedBy=timers.target
+#### **`dpkg`**
+- Base package management system for Debian.
+- Used for low-level package operations.
+```
+# Install a .deb package
+dpkg -i package_name.deb
 
-	Create a timer to run a service every 15 minutes
-	# Create a .service file
-	[Unit]
-	Description=Run Script Every 15 Minutes
+# Remove a package
+dpkg -r package_name
 
-	[Service]
-	Type=oneshot
-	ExecStart=/path/to/script.sh
+# List installed packages
+dpkg -l
+```
 
-	# Create a .timer file
-	[Unit]
-	Description=Run script every 15 minutes
+#### **`snap`**
+- Package manager for Snap packages.
+- Used for installing and managing containerized software packages.
+```
+# Install a snap package
+snap install package_name
 
-	[Timer]
-	OnBootSec=15min
-	OnUnitActiveSec=15min
-	Persistent=true
+# Remove a snap package
+snap remove package_name
 
-	[Install]
-	WantedBy=timers.target
-	```
+# List installed snap packages
+snap list
+```
 
-- **`anacron`**: 
-	- Executes commands periodically with a frequency specified in days.
-	- Used to ensure periodic tasks run even if the system was off.
-	```sh
-	Run a daily backup script
-	1       5       cron.daily              /path/to/backup/script.sh
+#### **`flatpak`**
+- Package manager for Flatpak packages.
+- Used for installing and running sandboxed desktop applications.
+```
+# Install a flatpak package
+flatpak install remote_name package_name
 
-	Run a weekly cleanup script
-	7       10      cron.weekly             /path/to/cleanup/script.sh
-	```
+# Remove a flatpak package
+flatpak uninstall package_name
 
-#### Search for, install, validate, and maintain software packages or repositories
+# List installed flatpak packages
+flatpak list
+```
 
-- **`yum`**: 
-	- Package manager for RPM-based distributions.  
-  	- Used for installing, updating, and removing packages.
+#### **`zypper`**
+- Command line interface of ZYpp package manager for openSUSE.
+- Used for installing, updating, and managing software packages.
+```
+# Install a package
+zypper install package_name
 
-- **`dnf`**: 
-	- Next-generation package manager for RPM-based distributions.  
-  	- Replaces `yum` with enhanced features and performance.
+# Remove a package
+zypper remove package_name
 
-- **`apt`**: 
-	- Package manager for Debian-based distributions.  
-  	- Commonly used for managing .deb packages.
+# Update all packages
+zypper update
+```
 
-- **`rpm`**: 
-	- Package manager for RPM packages.  
-  	- Used for installing, querying, verifying, updating, and removing RPM packages.
+#### **`pip`**
+- Package manager for Python packages.
+- Used to install and manage Python software libraries.
+```
+# Install a Python package
+pip install package_name
 
-- **`dpkg`**: 
-	- Base package management system for Debian.  
-  	- Used for low-level package operations.
+# Remove a Python package
+pip uninstall package_name
 
-- **`snap`**: 
-	- Package manager for Snap packages.  
-  	- Used for installing and managing containerized software packages.
+# List installed Python packages
+pip list
+```
 
-- **`flatpak`**: 
-	- Package manager for Flatpak packages.  
-  	- Used for installing and running sandboxed desktop applications.
+#### **`gem`**
+- Package manager for Ruby packages.
+- Used to manage Ruby libraries (gems).
+```
+# Install a gem
+gem install gem_name
 
-- **`zypper`**: 
-	- Command line interface of ZYpp package manager for openSUSE.  
-  	- Used for installing, updating, and managing software packages.
+# Uninstall a gem
+gem uninstall gem_name
 
-- **`pip`**: 
-	- Package manager for Python packages.  
-  	- Used to install and manage Python software libraries.
+# List installed gems
+gem list
+```
 
-- **`gem`**: 
-	- Package manager for Ruby packages.  
-  	- Used to manage Ruby libraries (gems).
+#### **`apt-key`**
+- Manages keys for apt's trusted keyring.
+- Used to add and remove repository signing keys.
+```
+# Add a key from a URL
+wget -qO - key_url | apt-key add -
 
-- **`apt-key`**: 
-	- Manages keys for apt's trusted keyring.  
-  	- Used to add and remove repository signing keys.
+# List trusted keys
+apt-key list
 
-- **`yum-config-manager`**: 
-	- Manages yum repository configuration.  
-  	- Used to add, enable, and disable repositories.
+# Remove a key
+apt-key del key_id
+```
 
-- **`add-apt-repository`**: 
-	- Adds a repository to the sources list.  
-  	- Used to include additional software sources.
+#### **`yum-config-manager`**
+- Manages yum repository configuration.
+- Used to add, enable, and disable repositories.
+```
+# Add a new repository
+yum-config-manager --add-repo repository_url
 
-- **`update-rc.d`**: 
-	- Updates System-V style init script links.  
-  	- Used to manage service runlevels in Debian-based systems.
+# Enable a repository
+yum-config-manager --enable repository_name
 
-- **`systemctl enable/disable`**: 
-	- Enables or disables a service to start at boot.  
-  	- Used to manage service startup in systemd systems.
+# Disable a repository
+yum-config-manager --disable repository_name
+```
+
+#### **`add-apt-repository`**
+- Adds a repository to the sources list.
+- Used to include additional software sources.
+```
+# Add a new repository
+add-apt-repository ppa:repository_name
+
+# Remove a repository
+add-apt-repository --remove ppa:repository_name
+
+# Update package lists
+apt update
+```
+
+#### **`update-rc.d`**
+- Updates System-V style init script links.
+- Used to manage service runlevels in Debian-based systems.
+```
+# Add a service to startup
+update-rc.d service_name defaults
+
+# Remove a service from startup
+update-rc.d -f service_name remove
+
+# List service runlevels
+update-rc.d service_name
+```
+
+#### **`systemctl enable/disable`**
+- Enables or disables a service to start at boot.
+- Used to manage service startup in systemd systems.
+```
+# Enable a service to start at boot
+systemctl enable service_name
+
+# Disable a service to prevent it from starting at boot
+systemctl disable service_name
+
+# Check if a service is enabled
+systemctl is-enabled service_name
+```
 
 #### Recover from hardware, operating system, or filesystem failures
 
